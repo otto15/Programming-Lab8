@@ -1,5 +1,6 @@
 package com.otto15.client;
 
+import com.otto15.client.gui.HelloFX;
 import com.otto15.client.listeners.ClientCommandListener;
 import com.otto15.client.listeners.ClientNetworkListener;
 import com.otto15.common.controllers.CommandManager;

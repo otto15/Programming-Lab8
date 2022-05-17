@@ -9,6 +9,9 @@ import com.otto15.common.network.Request;
 import com.otto15.common.network.Response;
 import com.otto15.common.state.PerformanceState;
 
+/**
+ * Class for client-server testing
+ */
 public class Test implements Runnable {
 
     private ClientNetworkListener clientNetworkListener;

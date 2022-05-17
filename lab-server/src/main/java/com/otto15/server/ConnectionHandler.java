@@ -26,6 +26,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.Future;
 
 
 public final class ConnectionHandler implements Runnable {
@@ -150,6 +151,7 @@ public final class ConnectionHandler implements Runnable {
         if (channelsState.get(channel) == ChannelState.READY_TO_WRITE) {
             channelsState.put(channel, ChannelState.WRITING);
             ResponseSender responseSender = new ResponseSender(channel, channels, selector, channelsState);
+
             CompletableFuture.supplyAsync(() -> requestExecutor.execute(channels.get((SocketChannel) key.channel()).array()), forkJoinPool)
                     .thenAcceptAsync(responseSender::send, forkJoinPool);
         }
