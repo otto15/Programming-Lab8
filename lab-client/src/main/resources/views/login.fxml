@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="220.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.Controller">
-    <Button mnemonicParsing="false" onAction="#switchToLoginScene" prefHeight="35.0" prefWidth="150.0" text="Login" />
+<AnchorPane prefHeight="220.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.LoginController">
+    <Button disable="true" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Login" />
     <Button layoutX="150.0" mnemonicParsing="false" onAction="#switchToRegisterScene" prefHeight="35.0" prefWidth="150.0" text="Register" />
     <Label layoutX="8.0" layoutY="77.0" prefHeight="18.0" prefWidth="65.0" text="Username">
         <font>
@@ -19,7 +19,7 @@
             <Font size="14.0" />
         </font>
     </Label>
-    <TextField fx:id="username" layoutX="75.0" layoutY="74.0" prefHeight="26.0" prefWidth="206.0" />
-    <TextField fx:id="password" layoutX="75.0" layoutY="121.0" prefHeight="26.0" prefWidth="206.0" />
+    <TextField fx:id="usernameField" layoutX="75.0" layoutY="74.0" prefHeight="26.0" prefWidth="206.0" />
+    <TextField fx:id="passwordField" layoutX="75.0" layoutY="121.0" prefHeight="26.0" prefWidth="206.0" />
     <Button layoutX="90.0" layoutY="169.0" mnemonicParsing="false" onAction="#logInButtonPressed" prefHeight="26.0" prefWidth="119.0" text="Log in" />
 </AnchorPane>

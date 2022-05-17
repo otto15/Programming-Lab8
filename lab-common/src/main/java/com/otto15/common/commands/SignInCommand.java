@@ -10,6 +10,10 @@ import java.io.IOException;
 
 public class SignInCommand extends AbstractCommand {
 
+    public SignInCommand() {
+        super("sign_in", "sign in user", 0);
+    }
+
     public SignInCommand(CommandManager commandManager) {
         super(commandManager, "sign_in", "sign in user", 0);
     }

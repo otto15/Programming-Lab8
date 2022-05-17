@@ -6,10 +6,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="278.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.Controller">
+<AnchorPane prefHeight="278.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.RegisterController">
     <children>
         <Button mnemonicParsing="false" onAction="#switchToLoginScene" prefHeight="35.0" prefWidth="150.0" text="Login" />
-        <Button layoutX="150.0" mnemonicParsing="false" onAction="#switchToRegisterScene" prefHeight="35.0" prefWidth="150.0" text="Register" />
+        <Button disable="true" layoutX="150.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Register" />
         <Label layoutX="5.0" layoutY="77.0" prefHeight="20.0" prefWidth="70.0" text="Username">
             <font>
                 <Font size="14.0" />
