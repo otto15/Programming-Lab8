@@ -49,7 +49,6 @@ public class DBInitializer {
             LogConfig.LOGGER.info("DB initialization succeeded");
             return 1;
         } catch (SQLException e) {
-            //e.printStackTrace();
             LogConfig.LOGGER.error("Problems during DB initialization");
             return -1;
         }

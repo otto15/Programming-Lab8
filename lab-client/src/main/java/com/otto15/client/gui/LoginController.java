@@ -45,7 +45,7 @@ public class LoginController {
 //        stage.show();
 //    }
 
-    public void logInButtonPressed() {
+    public void logInButtonPressed(Event event) throws IOException {
 //        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/msg.fxml")));
 
         String login = usernameField.getText();
@@ -56,7 +56,22 @@ public class LoginController {
         NetworkListener networkListener = new ClientNetworkListener(connectionHandler);
         connectionHandler.openConnection("localhost", 1234);
         Response response = networkListener.listen(request);
-        System.out.println(response.getMessage());
+
+        if (response.getUser() == null) {
+            usernameField.setText("молодец");
+            passwordField.setText("переделывай");
+        } else {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/views/main.fxml")));
+            root = loader.load();
+
+            MainController mainController = loader.getController();
+            mainController.display(response.getUser().getLogin());
+
+            stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
 
 //        Stage stageMsg = (Stage)((Node) event.getSource()).getScene().getWindow();
 //        Scene sceneMsg = new Scene(root);
