@@ -20,14 +20,15 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <TextField layoutX="75.0" layoutY="74.0" prefHeight="26.0" prefWidth="206.0" />
-        <TextField layoutX="75.0" layoutY="121.0" prefHeight="26.0" prefWidth="206.0" />
-        <Button layoutX="90.0" layoutY="223.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" text="Register" />
+        <TextField fx:id="usernameField" layoutX="75.0" layoutY="74.0" prefHeight="26.0" prefWidth="206.0" />
+        <TextField fx:id="passwordField" layoutX="75.0" layoutY="121.0" prefHeight="26.0" prefWidth="206.0" />
+        <Button layoutX="90.0" layoutY="223.0" mnemonicParsing="false" onAction="#registerButtonPressed" prefHeight="26.0" prefWidth="119.0" text="Register" />
         <Label layoutX="3.0" layoutY="160.0" prefHeight="46.0" prefWidth="70.0" text="Repeat password" textAlignment="CENTER" wrapText="true">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <TextField layoutX="75.0" layoutY="168.0" prefHeight="26.0" prefWidth="206.0" />
+        <TextField fx:id="repeatPasswordField" layoutX="75.0" layoutY="168.0" prefHeight="26.0" prefWidth="206.0" />
+      <Label fx:id="errorLabel" layoutX="76.0" layoutY="46.0" prefHeight="18.0" prefWidth="206.0" textFill="#fa0000" />
     </children>
 </AnchorPane>
