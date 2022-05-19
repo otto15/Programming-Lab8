@@ -10,7 +10,11 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 
 public class MainController {
@@ -24,6 +28,10 @@ public class MainController {
 
     public void display(String username) throws IOException {
         welcomeText.setText(username + " пиздуй нахуй отсюда!!!");
+    }
+
+    public static void main(String[] args) {
+
     }
 
 }
