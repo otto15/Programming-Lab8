@@ -30,7 +30,12 @@ public class LoginController {
     private TextField passwordField;
 
     public void switchToRegisterScene(Event event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/register.fxml")));
+        Localization localization = new Localization();
+
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/views/register.fxml")));
+        loader.setResources(localization.getResourceBundle());
+
+        root = loader.load();
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -46,7 +51,6 @@ public class LoginController {
 //    }
 
     public void logInButtonPressed(Event event) throws IOException {
-//        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/msg.fxml")));
 
         String login = usernameField.getText();
         String password = passwordField.getText();
@@ -62,6 +66,11 @@ public class LoginController {
             passwordField.setText("переделывай");
         } else {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/views/main.fxml")));
+
+            Localization localization = new Localization();
+
+            loader.setResources(localization.getResourceBundle());
+
             root = loader.load();
 
             MainController mainController = loader.getController();

@@ -86,6 +86,7 @@ public class DBWorkerImpl implements DBWorker {
             if (resultSet.next()) {
                 long userId = resultSet.getLong("user_id");
                 LogConfig.LOGGER.info("user with id - " + userId + " found");
+                user.setId(userId);
                 return userId;
             }
             return 0;

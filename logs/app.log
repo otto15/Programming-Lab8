@@ -1,2 +1,31 @@
 17/05/2022 23:04:17.084 [main] INFO  com.otto15.server.logging.LogConfig - DB initialization succeeded
 17/05/2022 23:04:21.069 [main] INFO  com.otto15.server.logging.LogConfig - Server launched on port - 1234
+17/05/2022 23:05:02.838 [main] INFO  com.otto15.server.logging.LogConfig - New connection accepted /127.0.0.1:57494
+17/05/2022 23:05:02.918 [Thread-1] INFO  com.otto15.server.logging.LogConfig - Got from /127.0.0.1:57494
+17/05/2022 23:05:05.273 [ForkJoinPool-1-worker-115] INFO  com.otto15.server.logging.LogConfig - user with id - 1 found
+17/05/2022 23:05:05.284 [ForkJoinPool-1-worker-115] INFO  com.otto15.server.logging.LogConfig - Sent response 282 bytes to /127.0.0.1:57494
+17/05/2022 23:23:49.733 [main] INFO  com.otto15.server.logging.LogConfig - New connection accepted /127.0.0.1:61481
+17/05/2022 23:23:49.843 [Thread-2] INFO  com.otto15.server.logging.LogConfig - Got from /127.0.0.1:61481
+17/05/2022 23:23:51.137 [ForkJoinPool-1-worker-101] INFO  com.otto15.server.logging.LogConfig - user with id - 1 found
+17/05/2022 23:23:51.139 [ForkJoinPool-1-worker-101] INFO  com.otto15.server.logging.LogConfig - Sent response 282 bytes to /127.0.0.1:61481
+17/05/2022 23:28:22.760 [main] INFO  com.otto15.server.logging.LogConfig - Connection closed /127.0.0.1:61481
+17/05/2022 23:28:24.596 [main] INFO  com.otto15.server.logging.LogConfig - Connection closed /127.0.0.1:57494
+17/05/2022 23:28:59.938 [main] INFO  com.otto15.server.logging.LogConfig - New connection accepted /127.0.0.1:54911
+17/05/2022 23:28:59.983 [Thread-5] INFO  com.otto15.server.logging.LogConfig - Got from /127.0.0.1:54911
+17/05/2022 23:29:01.083 [ForkJoinPool-1-worker-101] INFO  com.otto15.server.logging.LogConfig - user with id - 1 found
+17/05/2022 23:29:01.085 [ForkJoinPool-1-worker-101] INFO  com.otto15.server.logging.LogConfig - Sent response 282 bytes to /127.0.0.1:54911
+17/05/2022 23:31:21.616 [main] INFO  com.otto15.server.logging.LogConfig - Connection closed /127.0.0.1:54911
+17/05/2022 23:35:59.967 [main] INFO  com.otto15.server.logging.LogConfig - New connection accepted /127.0.0.1:60847
+17/05/2022 23:36:00.045 [Thread-7] INFO  com.otto15.server.logging.LogConfig - Got from /127.0.0.1:60847
+17/05/2022 23:36:01.315 [ForkJoinPool-1-worker-73] INFO  com.otto15.server.logging.LogConfig - user with id - 1 found
+17/05/2022 23:36:01.317 [ForkJoinPool-1-worker-73] INFO  com.otto15.server.logging.LogConfig - Sent response 282 bytes to /127.0.0.1:60847
+17/05/2022 23:49:27.830 [main] INFO  com.otto15.server.logging.LogConfig - Connection closed /127.0.0.1:60847
+17/05/2022 23:49:48.550 [main] INFO  com.otto15.server.logging.LogConfig - New connection accepted /127.0.0.1:57321
+17/05/2022 23:49:48.572 [Thread-9] INFO  com.otto15.server.logging.LogConfig - Got from /127.0.0.1:57321
+17/05/2022 23:49:49.811 [ForkJoinPool-1-worker-59] INFO  com.otto15.server.logging.LogConfig - Sent response 187 bytes to /127.0.0.1:57321
+17/05/2022 23:50:14.718 [main] INFO  com.otto15.server.logging.LogConfig - New connection accepted /127.0.0.1:57396
+17/05/2022 23:50:14.721 [Thread-10] INFO  com.otto15.server.logging.LogConfig - Got from /127.0.0.1:57396
+17/05/2022 23:50:15.838 [ForkJoinPool-1-worker-45] INFO  com.otto15.server.logging.LogConfig - user with id - 1 found
+17/05/2022 23:50:15.840 [ForkJoinPool-1-worker-45] INFO  com.otto15.server.logging.LogConfig - Sent response 282 bytes to /127.0.0.1:57396
+17/05/2022 23:55:51.971 [main] INFO  com.otto15.server.logging.LogConfig - Connection closed /127.0.0.1:57321
+17/05/2022 23:55:51.971 [main] INFO  com.otto15.server.logging.LogConfig - Connection closed /127.0.0.1:57396

@@ -37,7 +37,6 @@ public class SignInCommand extends AbstractCommand {
         if (result <= 0) {
             return new Response("Wrong credentials.");
         }
-        user.setId(result);
         return new Response("Signed in.", user);
     }
 

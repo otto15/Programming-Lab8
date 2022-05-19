@@ -24,7 +24,13 @@ public class RegisterController {
 //    }
 
     public void switchToLoginScene(Event event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/login.fxml")));
+        Localization localization = new Localization();
+
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/views/login.fxml")));
+        loader.setResources(localization.getResourceBundle());
+
+        Parent root = loader.load();
+
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
