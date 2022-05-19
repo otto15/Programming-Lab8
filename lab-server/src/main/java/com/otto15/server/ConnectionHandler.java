@@ -47,7 +47,8 @@ public final class ConnectionHandler implements Runnable {
         serverChannel = ServerSocketChannel.open();
         while (true) {
             try {
-                int port = inputPort();
+                //int port = inputPort();
+                int port = Integer.parseInt(System.getenv("SERVER_PORT"));
                 serverChannel.socket().bind(new InetSocketAddress(port));
                 LogConfig.LOGGER.info("Server launched on port - {}", serverChannel.socket().getLocalPort());
                 break;

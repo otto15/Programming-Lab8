@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -28,6 +29,8 @@ public class LoginController {
     private TextField usernameField;
     @FXML
     private TextField passwordField;
+    @FXML
+    private Label errorLabel;
 
     public void switchToRegisterScene(Event event) throws IOException {
         Localization localization = new Localization();
@@ -42,15 +45,9 @@ public class LoginController {
         stage.show();
     }
 
-//    public void switchToLoginScene(Event event) throws IOException {
-//        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/login.fxml")));
-//        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
-//    }
-
     public void logInButtonPressed(Event event) throws IOException {
+
+        errorLabel.setVisible(false);
 
         String login = usernameField.getText();
         String password = passwordField.getText();
@@ -58,12 +55,14 @@ public class LoginController {
 
         ConnectionHandler connectionHandler = new ConnectionHandler(new PerformanceState());
         NetworkListener networkListener = new ClientNetworkListener(connectionHandler);
-        connectionHandler.openConnection("localhost", 1234);
+        //TODO remove hardcoding
+        connectionHandler.openConnection(System.getenv("DB_HOST"), Integer.parseInt(System.getenv("SERVER_PORT")));
         Response response = networkListener.listen(request);
 
         if (response.getUser() == null) {
-            usernameField.setText("молодец");
-            passwordField.setText("переделывай");
+            usernameField.setText("");
+            passwordField.setText("");
+            errorLabel.setVisible(true);
         } else {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/views/main.fxml")));
 
@@ -81,11 +80,5 @@ public class LoginController {
             stage.setScene(scene);
             stage.show();
         }
-
-//        Stage stageMsg = (Stage)((Node) event.getSource()).getScene().getWindow();
-//        Scene sceneMsg = new Scene(root);
-//        stageMsg.setScene(sceneMsg);
-//        stageMsg.show();
-
     }
 }
