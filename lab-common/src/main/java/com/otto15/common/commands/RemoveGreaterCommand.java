@@ -36,10 +36,11 @@ public class RemoveGreaterCommand extends AbstractCommand {
         List<Person> personsToDelete = getCommandManager().getCollectionManager().getPersons().stream().filter(person -> (Objects.equals(person.getAuthor(), user.getLogin()) && person.compareTo((Person) args[0]) > 0)).collect(Collectors.toList());
         for (Person personToDelete : personsToDelete) {
             if (getCommandManager().getDBWorker().deletePersonById(personToDelete.getId()) < 0) {
-                return new Response("Could not delete because of DB problems.");
+                return new Response("Could not delete because of DB problems.", false);
             }
             getCommandManager().getCollectionManager().remove(personToDelete);
         }
-        return new Response((collectionLen - getCommandManager().getCollectionManager().getPersons().size()) + " object(s) was deleted.");
+        return new Response((collectionLen - getCommandManager().getCollectionManager().getPersons().size()) + " object(s) was deleted.",
+                true);
     }
 }

@@ -1,4 +1,4 @@
-package com.otto15.client.gui;
+package com.otto15.client.gui.controllers;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -30,8 +30,5 @@ public class MainController {
         welcomeText.setText(username + " пиздуй нахуй отсюда!!!");
     }
 
-    public static void main(String[] args) {
-
-    }
 
 }

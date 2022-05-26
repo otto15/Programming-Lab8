@@ -13,7 +13,7 @@ public class ShowCommand extends AbstractCommand {
 
     @Override
     public Response execute(Object[] args) {
-        return new Response(getCommandManager().getCollectionManager().show());
+        return new Response(getCommandManager().getCollectionManager().show(), "All persons provided.", true);
     }
 
 }

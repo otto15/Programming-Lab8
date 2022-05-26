@@ -22,6 +22,7 @@ import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class DBWorkerImpl implements DBWorker {
 
@@ -155,7 +156,7 @@ public class DBWorkerImpl implements DBWorker {
     }
 
     private Set<Person> parsePersonsFromResultSet(ResultSet resultSet) throws SQLException {
-        Set<Person> personSet = Collections.synchronizedSet(new HashSet<>());
+        Set<Person> personSet = ConcurrentHashMap.newKeySet();
         while (resultSet.next()) {
             Person person = new Person();
             person.setId(resultSet.getLong("person_id"));

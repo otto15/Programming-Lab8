@@ -9,29 +9,30 @@ import java.util.stream.Collectors;
 
 public class Response implements Serializable {
 
-    private String message;
+    private final boolean status;
+    private final String message;
     private Collection<Person> persons;
     private User user;
 
-    public Response(String message, User user) {
+    public Response(String message, User user, boolean status) {
         this.message = message;
         this.user = user;
+        this.status = status;
     }
 
-    public Response(String message) {
+    public Response(String message, boolean status) {
         this.message = message;
+        this.status = status;
     }
 
-    public Response(Collection<Person> persons) {
+    public Response(Collection<Person> persons, String message, boolean status) {
         this.persons = persons;
+        this.status = status;
+        this.message = message;
     }
 
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public User getUser() {
@@ -40,6 +41,10 @@ public class Response implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isStatus() {
+        return status;
     }
 
     public void showResult() {

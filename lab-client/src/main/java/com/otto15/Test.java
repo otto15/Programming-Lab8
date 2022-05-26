@@ -9,6 +9,8 @@ import com.otto15.common.network.Request;
 import com.otto15.common.network.Response;
 import com.otto15.common.state.PerformanceState;
 
+import java.io.IOException;
+
 /**
  * Class for client-server testing
  */
@@ -27,16 +29,20 @@ public class Test implements Runnable {
     public void run() {
 
         for (int i = 0; i < 100; ++i) {
-            if (test() < 0) {
-                System.out.println(count);
-                break;
+            try {
+                if (test() < 0) {
+                    System.out.println(count);
+                    break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
 
 
 
-    public int test() {
+    public int test() throws IOException {
         count++;
         Response response = clientNetworkListener.listen(new Request(new HelpCommand(commandManager), new Object[]{new User()}));
         if (response == null) {
@@ -50,12 +56,12 @@ public class Test implements Runnable {
         return 1;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         PerformanceState performanceState = new PerformanceState();
         for (int i = 0; i < 1000; ++i) {
             ConnectionHandler connectionHandler = new ConnectionHandler(performanceState);
             ClientNetworkListener clientNetworkListener = new ClientNetworkListener(connectionHandler);
-            CommandManager commandManager = new CommandManager(clientNetworkListener, performanceState);
+            CommandManager commandManager = new CommandManager(clientNetworkListener);
             connectionHandler.openConnection("localhost", 1);
             new Thread(new Test(clientNetworkListener, commandManager)) {
             }.start();

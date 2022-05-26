@@ -40,10 +40,10 @@ public class AddCommand extends AbstractCommand {
         CollectionManager collectionManager = getCommandManager().getCollectionManager();
 
         if (dbWorker.addPerson(personToAdd, user) <= 0) {
-            return new Response("Couldn't create person.");
+            return new Response("Couldn't create person.", false);
         }
 
         collectionManager.add(personToAdd);
-        return new Response("New person successfully created!");
+        return new Response("New person successfully created!", true);
     }
 }

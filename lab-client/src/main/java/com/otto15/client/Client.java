@@ -1,6 +1,5 @@
 package com.otto15.client;
 
-import com.otto15.client.gui.HelloFX;
 import com.otto15.client.listeners.ClientCommandListener;
 import com.otto15.client.listeners.ClientNetworkListener;
 import com.otto15.common.controllers.CommandManager;
@@ -17,7 +16,7 @@ public final class Client {
         PerformanceState performanceState = new PerformanceState();
         ConnectionHandler connectionHandler = new ConnectionHandler(performanceState);
         ClientNetworkListener clientListener = new ClientNetworkListener(connectionHandler);
-        CommandManager commandManager = new CommandManager(clientListener, performanceState);
+        CommandManager commandManager = new CommandManager(clientListener);
         ClientCommandListener commandListener = new ClientCommandListener(commandManager);
         System.out.println("Salamaleikum!");
         connectionHandler.openConnection();

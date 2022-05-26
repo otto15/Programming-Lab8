@@ -2,15 +2,8 @@ package com.otto15.common.network;
 
 import com.otto15.common.controllers.CommandListener;
 
-public class ResponseExecutor {
-
-    private final Response response;
-    private final CommandListener commandListener;
-
-    public ResponseExecutor(Response response, CommandListener commandListener) {
-        this.response = response;
-        this.commandListener = commandListener;
-    }
+public record ResponseExecutor(Response response,
+                               CommandListener commandListener) {
 
     public void execute() {
         response.showResult();

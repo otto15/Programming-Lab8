@@ -34,10 +34,9 @@ public class SignUpCommand extends AbstractCommand {
         User user = (User) args[0];
         long result = getCommandManager().getDBWorker().addUser(user);
         if (result <= 0) {
-            return new Response("Failed to create a user, this login is already occupied.");
+            return new Response("Failed to create a user, this login is already occupied.", false);
         }
-        user.setId(result);
-        return new Response("Signed up.", user);
+        return new Response("Signed up.", user, true);
     }
 
 }

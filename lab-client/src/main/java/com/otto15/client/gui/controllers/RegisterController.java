@@ -1,8 +1,9 @@
-package com.otto15.client.gui;
+package com.otto15.client.gui.controllers;
 
 import com.otto15.client.ConnectionHandler;
+import com.otto15.client.gui.Localization;
+import com.otto15.client.gui.models.AuthModel;
 import com.otto15.client.listeners.ClientNetworkListener;
-import com.otto15.common.commands.SignInCommand;
 import com.otto15.common.commands.SignUpCommand;
 import com.otto15.common.entities.User;
 import com.otto15.common.network.NetworkListener;
@@ -13,28 +14,44 @@ import jakarta.validation.constraints.NotNull;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class RegisterController {
+public class RegisterController implements Initializable {
+
+    private AuthModel authModel;
+
     private Stage stage;
     private Scene scene;
     private Parent root;
     @FXML
     private TextField usernameField;
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
     @FXML
-    private TextField repeatPasswordField;
+    private PasswordField repeatPasswordField;
     @FXML
     private Label errorLabel;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        authModel = new AuthModel();
+
+        authModel.usernameProperty().bind(usernameField.textProperty());
+        authModel.passwordProperty().bind(passwordField.textProperty());
+        authModel.repeatedPasswordProperty().bind(repeatPasswordField.textProperty());
+    }
 
     public void switchToLoginScene(Event event) throws IOException {
         Localization localization = new Localization();
@@ -55,10 +72,9 @@ public class RegisterController {
         String login = usernameField.getText();
         String password = passwordField.getText();
         String repeatPassword = repeatPasswordField.getText();
-        if (login.isEmpty()) {
-            setAndShowErrorMessage("Login must not be empty");
-            return;
-        }
+
+
+
         if (!password.equals(repeatPassword)) {
             setAndShowErrorMessage("Password not equals");
             return;

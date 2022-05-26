@@ -6,8 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.PasswordField?>
 <AnchorPane prefHeight="220.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.otto15.client.gui.LoginController">
+            fx:controller="com.otto15.client.gui.controllers.LoginController">
     <Button disable="true" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="%login_text"/>
     <Button layoutX="150.0" mnemonicParsing="false" onAction="#switchToRegisterScene" prefHeight="35.0"
             prefWidth="150.0" text="%register_text"/>
@@ -22,12 +23,12 @@
         </font>
     </Label>
     <TextField fx:id="usernameField" layoutX="75.0" layoutY="74.0" prefHeight="26.0" prefWidth="206.0"/>
-    <TextField fx:id="passwordField" layoutX="75.0" layoutY="121.0" prefHeight="26.0" prefWidth="206.0"/>
+    <PasswordField fx:id="passwordField" layoutX="75.0" layoutY="121.0" prefHeight="26.0" prefWidth="206.0"/>
 
     <Button layoutX="90.0" layoutY="169.0" mnemonicParsing="false" onAction="#logInButtonPressed" prefHeight="26.0"
             prefWidth="119.0" text="%sign_in_button_text"/>
 
     <Label fx:id="errorLabel" layoutX="74.0" layoutY="47.0" prefHeight="26.0" prefWidth="222.0"
-           text="Error when entering username/password" textFill="#ef0000" visible="false"/>
+           text="%sign_in_error_message" textFill="#ef0000" visible="false"/>
 
 </AnchorPane>

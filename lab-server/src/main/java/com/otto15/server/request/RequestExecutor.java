@@ -25,10 +25,10 @@ public class RequestExecutor {
         }
         long checkUserResult = commandManager.getDBWorker().checkUser(request.getUser());
         if (checkUserResult < 0) {
-            return new Response("DB problems, try again later.");
+            return new Response("DB problems, try again later.", false);
         }
         if (checkUserResult == 0) {
-            return new Response("Sign in/up first, call \"help\" to see list of commands.");
+            return new Response("Sign in/up first, call \"help\" to see list of commands.", false);
         }
         return commandManager.executeCommand(request.getCommand(), request.getArgs());
     }

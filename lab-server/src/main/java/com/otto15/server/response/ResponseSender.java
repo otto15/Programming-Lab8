@@ -31,7 +31,7 @@ public class ResponseSender {
 
         try {
             ByteBuffer buffer = ByteBuffer.wrap(response == null
-                    ? serializer.serialize(new Response("Problems on server."))
+                    ? serializer.serialize(new Response("Problems on server.", false))
                     : serializer.serialize(response));
             int responseLen = 0;
             while (buffer.hasRemaining()) {

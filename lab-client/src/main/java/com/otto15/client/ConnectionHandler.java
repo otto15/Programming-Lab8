@@ -26,6 +26,10 @@ public final class ConnectionHandler {
         this.performanceState = performanceState;
     }
 
+    public PerformanceState getPerformanceState() {
+        return performanceState;
+    }
+
     public int getLastPort() {
         return lastPort;
     }
@@ -58,7 +62,7 @@ public final class ConnectionHandler {
         }
     }
 
-    public int openConnection(String address, int port) {
+    public int openConnection(String address, int port) throws IOException {
         try {
             socket = new Socket(address, port);
             inputStream = socket.getInputStream();
@@ -68,7 +72,7 @@ public final class ConnectionHandler {
             lastPort = socket.getPort();
             System.out.println("Connected.");
             return 1;
-        } catch (IOException | IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             isOpen = false;
             System.out.println("Invalid host or port");
             return -1;

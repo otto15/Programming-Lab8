@@ -35,9 +35,9 @@ public class SignInCommand extends AbstractCommand {
         User user = (User) args[0];
         long result = getCommandManager().getDBWorker().checkUser(user);
         if (result <= 0) {
-            return new Response("Wrong credentials.");
+            return new Response("Wrong credentials.", false);
         }
-        return new Response("Signed in.", user);
+        return new Response("Signed in.", user, true);
     }
 
 

@@ -24,17 +24,17 @@ public class UpdateCommand extends AbstractCommand {
             User user = (User) args[1];
             Response response = getCommandManager().getNetworkListener()
                     .listen(new Request(new FindByIdCommand(getCommandManager()), new Object[]{id, user}));
-            if (response.getMessage() == null) {
-                System.out.println("No person found with such id.");
-                return null;
+            if (response.isStatus()) {
+                Person updatedPerson = PersonLoader.loadPersonWithCurrentValues(DataNormalizer.normalize(response.getMessage()));
+                updatedPerson.setId(id);
+                return new Object[]{updatedPerson, user};
             }
             if (response.getUser() == null) {
                 System.out.println("You do not have rights to update this person.");
                 return null;
             }
-            Person updatedPerson = PersonLoader.loadPersonWithCurrentValues(DataNormalizer.normalize(response.getMessage()));
-            updatedPerson.setId(id);
-            return new Object[]{updatedPerson, user};
+            System.out.println("No person found with such id.");
+            return null;
         } catch (IOException e) {
             System.out.println("Input error.");
         } catch (NumberFormatException e) {
@@ -49,9 +49,9 @@ public class UpdateCommand extends AbstractCommand {
         User user = (User) args[1];
         updatedPerson.setAuthor(user.getLogin());
         if (getCommandManager().getDBWorker().updatePerson(updatedPerson) <= 0) {
-            return new Response("Could not update person because of DB problems.");
+            return new Response("Could not update person because of DB problems.", false);
         }
         getCommandManager().getCollectionManager().update(updatedPerson);
-        return new Response("Person successfully updated!");
+        return new Response("Person successfully updated!", true);
     }
 }

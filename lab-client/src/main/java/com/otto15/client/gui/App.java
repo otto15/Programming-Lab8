@@ -7,12 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Locale;
-import java.util.MissingResourceException;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
-public class HelloFX extends Application {
+public class App extends Application {
 
     @Override
     public void start(Stage stage) {

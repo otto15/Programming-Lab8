@@ -18,12 +18,12 @@ public class FindByIdCommand extends AbstractCommand {
         User user = (User) args[1];
         Person foundPerson = getCommandManager().getCollectionManager().findById((Long) args[0]);
         if (foundPerson.getId() == -1) {
-            return new Response((String) null);
+            return new Response("Person was not found.", null, false);
         }
         if (!Objects.equals(foundPerson.getAuthor(), user.getLogin())) {
-            return new Response("", null);
+            return new Response("You do not have rights to the person with such id.", false);
         }
-        return new Response(foundPerson.currentValues(), user);
+        return new Response(foundPerson.currentValues(), user, true);
     }
 
 }

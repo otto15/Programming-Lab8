@@ -22,10 +22,10 @@ public class ClearCommand extends AbstractCommand {
     public Response execute(Object[] args) {
         User user = (User) args[0];
         if (getCommandManager().getDBWorker().deletePersonsByUser(user) < 0) {
-            return new Response("Could not clear persons, db problems.");
+            return new Response("Could not clear persons, db problems.", false);
         }
         getCommandManager().getCollectionManager().clear(user.getLogin());
-        return new Response("Your persons has been deleted.");
+        return new Response("Your persons has been deleted.", true);
     }
 
 }

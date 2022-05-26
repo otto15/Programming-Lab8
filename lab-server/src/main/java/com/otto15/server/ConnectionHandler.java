@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 
@@ -32,12 +33,12 @@ import java.util.concurrent.Future;
 public final class ConnectionHandler implements Runnable {
 
     private static final int SELECT_DELAY = 1000;
-    private final Map<SocketChannel, ByteBuffer> channels = Collections.synchronizedMap(new HashMap<>());
+    private final Map<SocketChannel, ByteBuffer> channels = new ConcurrentHashMap<>();
     private final ForkJoinPool forkJoinPool = new ForkJoinPool((int) (Runtime.getRuntime().availableProcessors() * 0.5 * (1 + 10)));
     private final Selector selector;
     private final ServerSocketChannel serverChannel;
     private final RequestExecutor requestExecutor;
-    private final Map<SocketChannel, ChannelState> channelsState = Collections.synchronizedMap(new HashMap<>());
+    private final Map<SocketChannel, ChannelState> channelsState = new ConcurrentHashMap<>();
     private final PerformanceState performanceState;
 
     public ConnectionHandler(RequestExecutor requestExecutor, PerformanceState performanceState) throws IOException {
@@ -90,6 +91,7 @@ public final class ConnectionHandler implements Runnable {
 
     private void close() {
         try {
+            forkJoinPool.shutdown();
             selector.close();
             serverChannel.close();
         } catch (IOException e) {
