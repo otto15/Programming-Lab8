@@ -5,8 +5,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 <?import javafx.scene.control.PasswordField?>
+
 <AnchorPane prefHeight="220.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.otto15.client.gui.controllers.LoginController">
     <Button disable="true" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="%login_text"/>

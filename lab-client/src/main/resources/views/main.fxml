@@ -4,10 +4,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" style="-fx-background-color: #73826b;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.controllers.MainController">
    <children>
-      <Label fx:id="welcomeText" alignment="CENTER" layoutX="85.0" layoutY="107.0" prefHeight="266.0" prefWidth="549.0" text="Уходите, я вас не звал!">
+      <Label fx:id="usernameLabel" alignment="CENTER" layoutX="85.0" layoutY="107.0" prefHeight="266.0" prefWidth="549.0" text="Уходите, я вас не звал!">
          <font>
             <Font name="Yu Gothic Regular" size="20.0" />
          </font>
