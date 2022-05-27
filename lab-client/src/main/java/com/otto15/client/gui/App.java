@@ -16,7 +16,7 @@ public class App extends Application {
         try {
             Localization localization = new Localization();
 
-            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/views/login.fxml")));
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.LOGIN_WINDOW_PATH.getPath())));
             loader.setResources(localization.getResourceBundle());
 
             Parent root = loader.load();
