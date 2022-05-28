@@ -36,16 +36,6 @@ public class LoginController extends AbstractController {
 
     public void switchToRegisterScene(Event event) {
         switchScene(event, Resources.REGISTER_WINDOW_PATH, (aClass -> new RegisterController()));
-        //        Localization localization = new Localization();
-//
-//        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.REGISTER_WINDOW_PATH.getPath())));
-//        loader.setResources(localization.getResourceBundle());
-//
-//        root = loader.load();
-//        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
     }
 
     public void logInButtonPressed(Event event) {
@@ -61,21 +51,7 @@ public class LoginController extends AbstractController {
                 return;
             }
 
-            switchScene(event, Resources.MAIN_WINDOW_PATH, (aClass -> new MainController(response.getUser().getLogin())));
-
-//            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.MAIN_WINDOW_PATH.getPath())));
-//
-//            Localization localization = new Localization();
-//
-//            loader.setResources(localization.getResourceBundle());
-//
-//            root = loader.load();
-//
-//            MainController mainController = loader.getController();
-//            mainController.display(response.getUser().getLogin());
-//            scene = new Scene(root);
-//            stage.setScene(scene);
-//            stage.show();
+            switchScene(event, Resources.MAIN_WINDOW_PATH, (aClass -> new MainController(response.getUser())));
         } catch (IOException e) {
             stage.close();
         }

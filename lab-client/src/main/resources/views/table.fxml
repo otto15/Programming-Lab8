@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--<AnchorPane xmlns="http://javafx.com/javafx"-->
+<!--            xmlns:fx="http://javafx.com/fxml"-->
+<!--            fx:controller="com.otto15.client.gui.controllers.TableController"-->
+<!--            prefHeight="400.0" prefWidth="600.0">-->
+<GridPane layoutY="41.0" prefHeight="365.0" prefWidth="518.0" AnchorPane.bottomAnchor="4.0"
+          AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="41.0"
+          xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.otto15.client.gui.controllers.TableController">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                </rowConstraints>
+                <children>
+                    <TableView fx:id="table" prefHeight="281.0" prefWidth="518.0" GridPane.hgrow="ALWAYS"
+                               GridPane.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="authorColumn" prefWidth="68.0" text="author"/>
+                            <TableColumn fx:id="idColumn" minWidth="4.0" prefWidth="39.20001220703125" text="id"/>
+                            <TableColumn fx:id="nameColumn" prefWidth="64.800048828125" text="name"/>
+                            <TableColumn fx:id="coordinatesColumn" prefWidth="79.99993896484375" text="coordinates"/>
+                            <TableColumn fx:id="heightColumn" prefWidth="66.39996337890625" text="height"/>
+                            <TableColumn fx:id="eyeColorColumn" prefWidth="69.60003662109375" text="eye color"/>
+                            <TableColumn fx:id="hairColorColumn" prefWidth="75.20001220703125" text="hair color"/>
+                            <TableColumn fx:id="nationalityColumn" prefWidth="75.0" text="nationality"/>
+                            <TableColumn fx:id="locationColumn" prefWidth="81.60009765625" text="location"/>
+                        </columns>
+                    </TableView>
+                </children>
+            </GridPane>
+        <!--</AnchorPane>-->

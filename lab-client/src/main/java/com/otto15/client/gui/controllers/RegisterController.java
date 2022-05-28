@@ -3,7 +3,6 @@ package com.otto15.client.gui.controllers;
 import com.otto15.client.gui.Resources;
 import com.otto15.client.gui.models.AuthModel;
 import com.otto15.common.network.Response;
-import jakarta.validation.constraints.NotNull;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -40,17 +39,6 @@ public class RegisterController extends AbstractController {
 
     public void switchToLoginScene(Event event) {
         switchScene(event, Resources.LOGIN_WINDOW_PATH, (aClass -> new LoginController()));
-//        Localization localization = new Localization();
-//
-//        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.LOGIN_WINDOW_PATH.getPath())));
-//        loader.setResources(localization.getResourceBundle());
-//
-//        Parent root = loader.load();
-//
-//        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
     }
 
     public void registerButtonPressed(Event event) {
@@ -67,31 +55,10 @@ public class RegisterController extends AbstractController {
                 passwordField.setText("");
                 repeatPasswordField.setText("");
             } else {
-                //TODO made common load for login and register
-                switchScene(event, Resources.MAIN_WINDOW_PATH, (aClass -> new MainController(response.getUser().getLogin())));
-//
-//                FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.MAIN_WINDOW_PATH.getPath())));
-//                root = loader.load();
-//
-//                MainController mainController = loader.getController();
-//                mainController.display(response.getUser().getLogin());
-//
-//                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//                scene = new Scene(root);
-//                stage.setScene(scene);
-//                stage.show();
+                switchScene(event, Resources.MAIN_WINDOW_PATH, (aClass -> new MainController(response.getUser())));
             }
         } catch (IOException e) {
             stage.close();
-
         }
-    }
-
-    private void setAndShowErrorMessage(@NotNull String message) {
-        errorLabel.setText(message);
-        errorLabel.setVisible(true);
-        usernameField.setText("");
-        passwordField.setText("");
-        repeatPasswordField.setText("");
     }
 }

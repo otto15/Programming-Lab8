@@ -1,34 +1,39 @@
 package com.otto15.client.gui.controllers;
 
+import com.otto15.client.gui.Localization;
 import com.otto15.client.gui.Resources;
-import com.otto15.common.entities.Person;
+import com.otto15.common.entities.User;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class MainController extends AbstractController {
-    private final String username;
+    private final User user;
+
     @FXML
     private Label usernameLabel;
     @FXML
     private GridPane pane;
-    private Set<Person> persons;
-    private
+    @FXML
+    private BorderPane borderPane;
 
-    public MainController(String username) {
-        this.username = username;
+    public MainController(User user) {
+        this.user = user;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        usernameLabel.setText("username:\n" + username);
+        usernameLabel.setText(user.getLogin());
     }
 
     public void addButtonPressed() {
@@ -39,6 +44,26 @@ public class MainController extends AbstractController {
 
     }
 
+    public void tableButtonPressed() throws IOException {
+        Localization localization = new Localization();
+
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.TABLE_PATH.getPath())));
+        loader.setResources(localization.getResourceBundle());
+
+        pane.getChildren().remove(1, 1);
+        pane.add(loader.load(), 1, 1);
+    }
+
+    public void visualizeButtonPressed() throws IOException {
+        Localization localization = new Localization();
+
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.VISUALIZE_PATH.getPath())));
+        loader.setResources(localization.getResourceBundle());
+
+        pane.getChildren().remove(1, 1);
+        pane.add(loader.load(), 1, 1);
+    }
+
     public void logoutButtonPressed(Event event) {
         switchScene(event, Resources.LOGIN_WINDOW_PATH, (aClass -> new LoginController()));
     }
@@ -47,5 +72,4 @@ public class MainController extends AbstractController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
-
 }
