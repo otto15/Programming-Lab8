@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" styleClass="root" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.controllers.MainController">
    <top>
       <AnchorPane fx:id="topBar" prefHeight="69.0" prefWidth="720.0" styleClass="top-bar" BorderPane.alignment="CENTER">
@@ -119,3 +120,4 @@
       </AnchorPane>
    </center>
 </BorderPane>
+

@@ -28,24 +28,12 @@ public class AuthModel {
         repeatedPassword = new SimpleStringProperty();
     }
 
-    public String getUsername() {
-        return username.get();
-    }
-
     public StringProperty usernameProperty() {
         return username;
     }
 
-    public String getPassword() {
-        return password.get();
-    }
-
     public StringProperty passwordProperty() {
         return password;
-    }
-
-    public String getRepeatedPassword() {
-        return repeatedPassword.get();
     }
 
     public StringProperty repeatedPasswordProperty() {
