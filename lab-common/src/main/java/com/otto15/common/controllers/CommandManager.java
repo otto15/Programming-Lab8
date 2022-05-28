@@ -55,10 +55,13 @@ public final class CommandManager {
     private DBWorker dbWorker;
     private PerformanceState performanceState;
 
+    {
+        performanceState = PerformanceState.getInstance();
+    }
+
     public CommandManager(CollectionManager collectionManager, DBWorker dbWorker) {
         this.collectionManager = collectionManager;
         this.dbWorker = dbWorker;
-        this.performanceState = new PerformanceState();
     }
 
     public CommandManager(NetworkListener networkListener) {

@@ -57,7 +57,7 @@ public class Test implements Runnable {
     }
 
     public static void main(String[] args) throws IOException {
-        PerformanceState performanceState = new PerformanceState();
+        PerformanceState performanceState = PerformanceState.getInstance();
         for (int i = 0; i < 1000; ++i) {
             ConnectionHandler connectionHandler = new ConnectionHandler(performanceState);
             ClientNetworkListener clientNetworkListener = new ClientNetworkListener(connectionHandler);

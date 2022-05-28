@@ -85,7 +85,7 @@ public class RegisterController implements Initializable {
         }
         Request request = new Request(new SignUpCommand(), new Object[]{new User(login, password)});
 
-        ConnectionHandler connectionHandler = new ConnectionHandler(new PerformanceState());
+        ConnectionHandler connectionHandler = new ConnectionHandler(PerformanceState.getInstance());
         NetworkListener networkListener = new ClientNetworkListener(connectionHandler);
         //TODO remove hardcoding
         connectionHandler.openConnection(System.getenv("DB_HOST"), Integer.parseInt(System.getenv("SERVER_PORT")));

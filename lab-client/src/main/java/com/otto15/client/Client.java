@@ -13,7 +13,7 @@ public final class Client {
     }
 
     public static void main(String[] args) {
-        PerformanceState performanceState = new PerformanceState();
+        PerformanceState performanceState = PerformanceState.getInstance();
         ConnectionHandler connectionHandler = new ConnectionHandler(performanceState);
         ClientNetworkListener clientListener = new ClientNetworkListener(connectionHandler);
         CommandManager commandManager = new CommandManager(clientListener);

@@ -33,7 +33,7 @@ public final class Server {
             Set<Person> personSet = dbWorker.selectAllPersons();
             if (personSet != null) {
                 CollectionManager collectionManager = new CollectionManagerImpl(personSet);
-                PerformanceState performanceState = new PerformanceState();
+                PerformanceState performanceState = PerformanceState.getInstance();
                 CommandManager commandManager = new CommandManager(collectionManager, dbWorker);
                 RequestExecutor requestExecutor = new RequestExecutor(commandManager);
                 try {

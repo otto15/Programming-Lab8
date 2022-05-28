@@ -1,6 +1,5 @@
 package com.otto15.client.listeners;
 
-import com.otto15.client.Client;
 import com.otto15.client.ClientDispatcher;
 import com.otto15.client.ConnectionHandler;
 import com.otto15.common.network.NetworkListener;
@@ -27,8 +26,7 @@ public final class ClientNetworkListener implements NetworkListener {
     public static class NetworkListenerHolder {
         public static final NetworkListener HOLDER_INSTANCE = new ClientNetworkListener(
                 new ConnectionHandler(
-                        new PerformanceState()
-                ));
+                        PerformanceState.getInstance()));
     }
 
 
