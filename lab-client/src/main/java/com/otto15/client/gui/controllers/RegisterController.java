@@ -1,5 +1,7 @@
 package com.otto15.client.gui.controllers;
 
+import com.otto15.client.exceptions.LostConnectionException;
+import com.otto15.client.exceptions.ValidationException;
 import com.otto15.client.gui.Resources;
 import com.otto15.client.gui.models.AuthModel;
 import com.otto15.common.network.Response;
@@ -13,6 +15,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class RegisterController extends AbstractController {
@@ -26,7 +30,9 @@ public class RegisterController extends AbstractController {
     @FXML
     private PasswordField repeatPasswordField;
     @FXML
-    private Label errorLabel;
+    private Label usernameErrorLabel;
+    @FXML
+    private Label passwordErrorLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -42,22 +48,20 @@ public class RegisterController extends AbstractController {
     }
 
     public void registerButtonPressed(Event event) {
-        errorLabel.setVisible(false);
+        usernameErrorLabel.setVisible(false);
+        passwordErrorLabel.setVisible(false);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try {
             Response response = authModel.register();
-
-            if (!response.isStatus()) {
-                errorLabel.setText("Such user already exist");
-                errorLabel.setVisible(true);
-                usernameField.setText("");
-                passwordField.setText("");
-                repeatPasswordField.setText("");
-            } else {
-                switchScene(event, Resources.MAIN_WINDOW_PATH, (aClass -> new MainController(response.getUser())));
-            }
-        } catch (IOException e) {
+            switchScene(event, Resources.MAIN_WINDOW_PATH, (aClass -> new MainController(response.getUser())));
+        } catch (ValidationException e) {
+            List<String> validationErrorsList = e.getValidationErrorsList();
+            List<TextField> errorFields = Arrays.asList(usernameField, passwordField);
+            List<Label> errorLabels = Arrays.asList(usernameErrorLabel, passwordErrorLabel);
+            showErrors(errorFields, errorLabels, validationErrorsList);
+        } catch (LostConnectionException e) {
+            e.showAlert();
             stage.close();
         }
     }

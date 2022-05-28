@@ -43,17 +43,19 @@ public final class UserValidator {
         return args[0];
     }
 
-    public static List<Exception> validateUser(User user) {
-        List<Exception> validationErrorsList = new ArrayList<>();
+    public static List<String> validateUser(User user) {
+        List<String> validationErrorsList = new ArrayList<>();
         try {
-            getValidatedLogin(new String[]{user.getLogin()});
+            getValidatedLogin(user.getLogin().split(" "));
+            validationErrorsList.add(null);
         } catch (IllegalArgumentException e) {
-            validationErrorsList.add(e);
+            validationErrorsList.add(e.getMessage());
         }
         try {
-            getValidatedPassword(new String[]{user.getPassword()});
+            getValidatedPassword(user.getPassword().split(" "));
+            validationErrorsList.add(null);
         } catch (IllegalArgumentException e) {
-            validationErrorsList.add(e);
+            validationErrorsList.add(e.getMessage());
         }
         return validationErrorsList;
     }
