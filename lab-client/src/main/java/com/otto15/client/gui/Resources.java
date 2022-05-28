@@ -3,7 +3,9 @@ package com.otto15.client.gui;
 public enum Resources {
     LOGIN_WINDOW_PATH("/views/login.fxml"),
     REGISTER_WINDOW_PATH("/views/register.fxml"),
-    MAIN_WINDOW_PATH("/views/main.fxml");
+    MAIN_WINDOW_PATH("/views/main.fxml"),
+    TABLE_PATH("/views/table.fxml"),
+    VISUALIZE_PATH("/views/visualize.fxml");
 
     private final String path;
 

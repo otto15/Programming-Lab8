@@ -38,7 +38,7 @@ public class RegisterController extends AbstractController {
         authModel.repeatedPasswordProperty().bind(repeatPasswordField.textProperty());
     }
 
-    public void switchToLoginScene(Event event) throws IOException {
+    public void switchToLoginScene(Event event) {
         switchScene(event, Resources.LOGIN_WINDOW_PATH, (aClass -> new LoginController()));
 //        Localization localization = new Localization();
 //
