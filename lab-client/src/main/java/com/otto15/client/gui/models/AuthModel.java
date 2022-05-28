@@ -5,19 +5,24 @@ import com.otto15.common.commands.SignInCommand;
 import com.otto15.common.commands.SignUpCommand;
 
 import com.otto15.common.entities.User;
+import com.otto15.common.entities.validators.UserValidator;
 import com.otto15.common.network.NetworkListener;
 import com.otto15.common.network.Request;
 import com.otto15.common.network.Response;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.util.Pair;
 
 import java.io.IOException;
+import java.util.List;
 
 public class AuthModel {
 
     private final StringProperty username;
     private final StringProperty password;
     private final StringProperty repeatedPassword;
+
+
 
     private final NetworkListener networkListener;
 
@@ -43,18 +48,28 @@ public class AuthModel {
     public Response login() throws IOException {
         User user = new User(username.get(), password.get());
 
+        List<Exception> validationErrorsList = UserValidator.validateUser(user);
 
-        //TODO validation
+        Response response = null;
+        if (validationErrorsList.size() == 0) {
+            response = networkListener.listen(new Request(
+                    new SignInCommand(), new Object[]{user}
+            ));
+        }
 
-        return networkListener.listen(new Request(
-                new SignInCommand(), new Object[]{user}
-        ));
+        return response;
     }
 
     public Response register() throws IOException {
         User user = new User(username.get(), password.get());
+        Response response = null;
 
-        //TODO validation
+        List<Exception> validationErrorsList = UserValidator.validateUser(user);
+
+        if (!repeatedPassword.equals(password)) {
+            validationErrorsList.add(new IllegalArgumentException(""));
+        }
+
 
         return networkListener.listen(new Request(
                 new SignUpCommand(), new Object[]{user}

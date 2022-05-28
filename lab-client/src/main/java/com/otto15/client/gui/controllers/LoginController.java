@@ -36,6 +36,7 @@ public class LoginController extends AbstractController {
 
     public void switchToRegisterScene(Event event) {
         switchScene(event, Resources.REGISTER_WINDOW_PATH, (aClass -> new RegisterController()));
+
     }
 
     public void logInButtonPressed(Event event) {
@@ -52,6 +53,8 @@ public class LoginController extends AbstractController {
             }
 
             switchScene(event, Resources.MAIN_WINDOW_PATH, (aClass -> new MainController(response.getUser())));
+
+
         } catch (IOException e) {
             stage.close();
         }

@@ -1,5 +1,10 @@
 package com.otto15.common.entities.validators;
 
+import com.otto15.common.entities.User;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public final class UserValidator {
 
     private static final short MIN_PASSWORD_LENGTH = 4;
@@ -36,6 +41,21 @@ public final class UserValidator {
             throw new IllegalArgumentException("Password must have at least 4 characters.");
         }
         return args[0];
+    }
+
+    public static List<Exception> validateUser(User user) {
+        List<Exception> validationErrorsList = new ArrayList<>();
+        try {
+            getValidatedLogin(new String[]{user.getLogin()});
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e);
+        }
+        try {
+            getValidatedPassword(new String[]{user.getPassword()});
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e);
+        }
+        return validationErrorsList;
     }
 
 }
