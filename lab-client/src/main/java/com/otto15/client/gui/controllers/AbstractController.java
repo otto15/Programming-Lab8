@@ -8,10 +8,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class AbstractController implements Initializable {
@@ -32,6 +35,18 @@ public abstract class AbstractController implements Initializable {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void showErrors(List<TextField> errorFields, List<Label> errorLabels, List<String> errorMessages) {
+        for (int i = 0; i < errorMessages.size(); i++) {
+            String errorMessage = errorMessages.get(i);
+            if (errorMessage == null) {
+                continue;
+            }
+            errorFields.get(i).setText("");
+            errorLabels.get(i).setText(errorMessage);
+            errorLabels.get(i).setVisible(true);
         }
     }
 }
