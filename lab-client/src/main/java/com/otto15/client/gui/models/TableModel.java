@@ -37,24 +37,6 @@ public class TableModel {
         this.user = user;
     }
 
-    public void launchUpdatingPersons() {
-        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        PerformanceState performanceState = PerformanceState.getInstance();
-
-        long delay = 0;
-        long period = 5000L;
-        executor.scheduleAtFixedRate(() -> {
-            if (!performanceState.getPerformanceStatus()) {
-                executor.shutdown();
-            }
-            try {
-                getNewCollection();
-            } catch (LostConnectionException e) {
-                e.showAlert();
-            }
-        }, delay, period, TimeUnit.MILLISECONDS);
-    }
-
     public void getNewCollection() throws LostConnectionException {
         Response response;
         try {
