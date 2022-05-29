@@ -36,7 +36,7 @@ public final class ClientNetworkListener implements NetworkListener {
 
 
     @Override
-    public Response listen(Request request) throws IOException {
+    public synchronized Response listen(Request request) throws IOException {
         if (!connectionHandler.isOpen()) {
             connectionHandler.openConnection(System.getenv("DB_HOST"),
                     Integer.parseInt(System.getenv("SERVER_PORT")));

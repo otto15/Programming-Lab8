@@ -47,6 +47,10 @@ public class Response implements Serializable {
         return status;
     }
 
+    public Collection<Person> getPersons() {
+        return persons;
+    }
+
     public void showResult() {
         if (persons != null) {
             if (persons.isEmpty()) {

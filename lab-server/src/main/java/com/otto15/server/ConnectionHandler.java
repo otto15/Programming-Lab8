@@ -143,7 +143,7 @@ public final class ConnectionHandler implements Runnable {
             new Thread(new RequestReader(channel, channels, selector, channelsState))
                     .start();
         }
-        if (channels.get((SocketChannel) key.channel()) == null) {
+        if (channelsState.get(channel) == ChannelState.READY_TO_DIE) {
             throw new IOException();
         }
     }
@@ -158,7 +158,7 @@ public final class ConnectionHandler implements Runnable {
             CompletableFuture.supplyAsync(() -> requestExecutor.execute(channels.get((SocketChannel) key.channel()).array()), forkJoinPool)
                     .thenAcceptAsync(responseSender::send, forkJoinPool);
         }
-        if (channels.get((SocketChannel) key.channel()) == null) {
+        if (channelsState.get(channel) == ChannelState.READY_TO_DIE) {
             throw new IOException();
         }
     }

@@ -3,21 +3,21 @@ package com.otto15.client.gui.controllers;
 import com.otto15.client.gui.Localization;
 import com.otto15.client.gui.Resources;
 import com.otto15.common.entities.User;
+import com.otto15.common.state.PerformanceState;
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainController extends AbstractController {
+
     private final User user;
 
     @FXML
@@ -55,9 +55,9 @@ public class MainController extends AbstractController {
         Localization localization = new Localization();
 
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.TABLE_PATH.getPath())));
+        loader.setControllerFactory(aClass -> new TableController(user));
         loader.setResources(localization.getResourceBundle());
 
-        tableButton.requestFocus();
         borderPane.setCenter(loader.load());
     }
 
@@ -75,7 +75,7 @@ public class MainController extends AbstractController {
     }
 
     public void exitButtonPressed(Event event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+        PerformanceState.getInstance().switchPerformanceStatus();
+        Platform.exit();
     }
 }

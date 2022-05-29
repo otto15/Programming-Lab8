@@ -93,7 +93,7 @@ public final class CommandManager {
         clientCommands.put("sum_of_height", new SumOfHeightCommand(this));
         clientCommands.put("update", new UpdateCommand(this));
         clientCommands.put("group_counting_by_height", new GroupCountingByHeightCommand(this));
-        clientCommands.put("show", new ShowCommand(this));
+        clientCommands.put("show", new ShowCommand());
     }
 
     public PerformanceState getPerformanceState() {
