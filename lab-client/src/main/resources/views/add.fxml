@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="365.0" text="Add" textAlignment="CENTER" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.controllers.CommandController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="385.0" prefWidth="364.0">
+         <children>
+            <TextField fx:id="nameField" layoutX="108.0" layoutY="25.0" prefHeight="25.0" prefWidth="240.0" />
+            <Label alignment="CENTER" layoutX="15.0" layoutY="25.0" prefHeight="25.0" prefWidth="85.0" text="Name:" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="15.0" layoutY="70.0" prefHeight="25.0" prefWidth="85.0" text="Coordinates:" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField layoutX="108.0" layoutY="70.0" prefHeight="30.0" prefWidth="90.0" fx:id="xCoordinatesField" />
+            <TextField fx:id="yCoordinatesField" layoutX="257.0" layoutY="70.0" prefHeight="30.0" prefWidth="90.0" />
+            <Label alignment="CENTER" layoutX="15.0" layoutY="115.0" prefHeight="25.0" prefWidth="85.0" text="Height:" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="heightField" layoutX="108.0" layoutY="115.0" prefHeight="25.0" prefWidth="240.0" />
+            <Label alignment="CENTER" layoutX="15.0" layoutY="160.0" prefHeight="25.0" prefWidth="85.0" text="Eye color:" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="eyeColorComboBox" layoutX="108.0" layoutY="160.0" prefHeight="30.0" prefWidth="240.0" promptText=" Choose eye color" />
+            <Label alignment="CENTER" layoutX="15.0" layoutY="205.0" prefHeight="25.0" prefWidth="85.0" text="Hair color:" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="hairColorComboBox" layoutX="108.0" layoutY="205.0" prefHeight="30.0" prefWidth="240.0" promptText=" Choose hair color" />
+            <Label alignment="CENTER" layoutX="15.0" layoutY="250.0" prefHeight="25.0" prefWidth="85.0" text="Country:" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="nationalityComboBox" layoutX="108.0" layoutY="250.0" prefHeight="30.0" prefWidth="240.0" promptText=" Choose country" />
+            <Label alignment="CENTER" layoutX="15.0" layoutY="295.0" prefHeight="25.0" prefWidth="85.0" text="Location:" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField layoutX="108.0" layoutY="295.0" prefHeight="30.0" prefWidth="73.0" fx:id="xLocationField" />
+            <TextField fx:id="yLocationField" layoutX="191.0" layoutY="295.0" prefHeight="30.0" prefWidth="73.0" />
+            <TextField fx:id="zLocationField" layoutX="274.0" layoutY="295.0" prefHeight="30.0" prefWidth="73.0" />
+            <Button layoutX="50.0" layoutY="350.0" mnemonicParsing="false" onAction="#addButtonPressed" prefHeight="30.0" prefWidth="110.0" text="Add">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="210.0" layoutY="350.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" text="Add if min">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+  </content>
+   <font>
+      <Font size="19.0" />
+   </font>
+</TitledPane>

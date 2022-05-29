@@ -17,6 +17,10 @@ import java.io.IOException;
  */
 public class AddCommand extends AbstractCommand {
 
+    public AddCommand() {
+        super( "add", "adds element to collection", 0);
+    }
+
     public AddCommand(CommandManager commandManager) {
         super(commandManager, "add", "adds element to collection", 0);
     }

@@ -10,7 +10,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -44,8 +43,8 @@ public class MainController extends AbstractController {
         }
     }
 
-    public void addButtonPressed() {
-        //TODO add
+    public void addButtonPressed(Event event) {
+        openPopupWindow(event, Resources.ADD_PATH, aClass -> new CommandController(user));
     }
 
     public void clearButtonPressed() {

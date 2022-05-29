@@ -3,8 +3,15 @@ package com.otto15.common.entities.validators;
 import com.otto15.common.entities.Coordinates;
 import com.otto15.common.entities.Location;
 import com.otto15.common.entities.Person;
+import com.otto15.common.entities.User;
 import com.otto15.common.entities.enums.Color;
 import com.otto15.common.entities.enums.Country;
+import com.otto15.common.exceptions.ValidationException;
+import com.otto15.common.utils.DataNormalizer;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -126,5 +133,77 @@ public final class PersonValidator {
                 && isCountryValid(person.getNationality())
                 && isCoordinatesValid(person.getCoordinates())
                 && isLocationValid(person.getLocation());
+    }
+
+    public static Person validatePersonFromString(String name, String xCoordinates, String yCoordinates, String sHeight, Color eyeColor, Color hairColor, Country nationality, String xLocation, String yLocation, String zLocation) throws ValidationException {
+        List<String> validationErrorsList = new ArrayList<>();
+        Person person = new Person();
+        try {
+            name = getValidatedName(DataNormalizer.normalize(name));
+            person.setName(name);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        try {
+            Coordinates coordinates = getValidatedCoordinates(new String[] {xCoordinates, yCoordinates});
+            person.setCoordinates(coordinates);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        try {
+            long height = getValidatedHeight(DataNormalizer.normalize(sHeight));
+            person.setHeight(height);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        try {
+            if (eyeColor == null) {
+                throw new IllegalArgumentException("You have to choose an eye color");
+            }
+            person.setEyeColor(eyeColor);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        try {
+            if (hairColor == null) {
+                throw new IllegalArgumentException("You have to choose an hair color");
+            }
+            person.setHairColor(hairColor);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        try {
+            if (nationality == null) {
+                throw new IllegalArgumentException("You have to choose an country");
+            }
+            person.setNationality(nationality);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        try {
+            Location location = getValidatedLocation(new String[] {xLocation, yLocation, zLocation});
+            person.setLocation(location);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        if (validationErrorsList.stream().anyMatch(Objects::nonNull)) {
+            throw new ValidationException(validationErrorsList);
+        }
+
+        return person;
     }
 }
