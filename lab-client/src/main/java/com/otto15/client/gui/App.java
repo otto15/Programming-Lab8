@@ -1,6 +1,8 @@
 package com.otto15.client.gui;
 
+import com.otto15.common.state.PerformanceState;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,6 +26,10 @@ public class App extends Application {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setResizable(false);
+            stage.setOnCloseRequest(windowEvent -> {
+                PerformanceState.getInstance().switchPerformanceStatus();
+                Platform.exit();
+            });
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
