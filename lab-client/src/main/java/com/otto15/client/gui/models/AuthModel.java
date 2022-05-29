@@ -1,6 +1,7 @@
 package com.otto15.client.gui.models;
 
-import com.otto15.client.exceptions.LostConnectionException;
+import com.otto15.client.exceptions.AlertException;
+import com.otto15.common.commands.SignUpCommand;
 import com.otto15.common.exceptions.ValidationException;
 import com.otto15.client.listeners.ClientNetworkListener;
 import com.otto15.common.commands.SignInCommand;
@@ -13,8 +14,7 @@ import com.otto15.common.network.Response;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
+import java.util.Arrays;
 
 public class AuthModel {
 
@@ -45,14 +45,8 @@ public class AuthModel {
         return repeatedPassword;
     }
 
-    public Response login() throws LostConnectionException, ValidationException {
-        User user = new User(username.get(), password.get());
-
-
-        List<String> validationErrorsList = UserValidator.validateUser(user);
-        if (validationErrorsList.stream().anyMatch(Objects::nonNull)) {
-            throw new ValidationException(validationErrorsList);
-        }
+    public Response login() throws AlertException, ValidationException {
+        User user = UserValidator.validateUser(username.get(), password.get());
 
         Response response;
         try {
@@ -60,41 +54,29 @@ public class AuthModel {
                     new SignInCommand(), new Object[]{user}
             ));
         } catch (IOException e) {
-            throw new LostConnectionException("Server isn't available, try later");
+            throw new AlertException("Server isn't available, try later", e);
         }
 
         if (!response.isStatus()) {
-            validationErrorsList.set(0, "Error when entering username/password");
-            throw new ValidationException(validationErrorsList);
+            throw new ValidationException(Arrays.asList("Error when entering username/password", null));
         }
         return response;
     }
 
-    public Response register() throws LostConnectionException, ValidationException {
-        User user = new User(username.get(), password.get());
-
-        List<String> validationErrorsList = UserValidator.validateUser(user);
-        if (validationErrorsList.stream().anyMatch(Objects::nonNull)) {
-            throw new ValidationException(validationErrorsList);
-        }
-        //TODO make registration validation
-        if (!password.get().equals(repeatedPassword.get())) {
-            validationErrorsList.set(1, "Passwords must be the same");
-            throw new ValidationException(validationErrorsList);
-        }
+    public Response register() throws AlertException, ValidationException {
+        User user = UserValidator.validateUser(username.get(), password.get(), repeatedPassword.get());
 
         Response response;
         try {
             response = networkListener.listen(new Request(
-                    new SignInCommand(), new Object[]{user}
+                    new SignUpCommand(), new Object[]{user}
             ));
         } catch (IOException e) {
-            throw new LostConnectionException("Server isn't available, try later");
+            throw new AlertException("Server isn't available, try later", e);
         }
 
         if (!response.isStatus()) {
-            validationErrorsList.set(0, "Such user already exist");
-            throw new ValidationException(validationErrorsList);
+            throw new ValidationException(Arrays.asList("Such user already exist", null, null));
         }
         return response;
 

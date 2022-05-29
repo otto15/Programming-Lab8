@@ -1,6 +1,6 @@
 package com.otto15.client.gui.controllers;
 
-import com.otto15.client.exceptions.LostConnectionException;
+import com.otto15.client.exceptions.AlertException;
 import com.otto15.common.exceptions.ValidationException;
 import com.otto15.client.gui.Resources;
 import com.otto15.client.gui.models.AuthModel;
@@ -32,6 +32,8 @@ public class RegisterController extends AbstractController {
     private Label usernameErrorLabel;
     @FXML
     private Label passwordErrorLabel;
+    @FXML
+    private Label repeatPasswordLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,10 +58,10 @@ public class RegisterController extends AbstractController {
             switchScene(event, Resources.MAIN_WINDOW_PATH, (aClass -> new MainController(response.getUser())));
         } catch (ValidationException e) {
             List<String> validationErrorsList = e.getValidationErrorsList();
-            List<TextField> errorFields = Arrays.asList(usernameField, passwordField);
-            List<Label> errorLabels = Arrays.asList(usernameErrorLabel, passwordErrorLabel);
+            List<TextField> errorFields = Arrays.asList(usernameField, passwordField, repeatPasswordField);
+            List<Label> errorLabels = Arrays.asList(usernameErrorLabel, passwordErrorLabel, repeatPasswordLabel);
             showErrors(errorFields, errorLabels, validationErrorsList);
-        } catch (LostConnectionException e) {
+        } catch (AlertException e) {
             e.showAlert();
             stage.close();
         }

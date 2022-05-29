@@ -34,7 +34,8 @@
         </Label>
 
         <Label fx:id="usernameErrorLabel" layoutX="75.0" layoutY="55.0" prefHeight="18.0" prefWidth="206.0" textFill="#fa0000" />
-      <Label fx:id="passwordErrorLabel" layoutX="76.0" layoutY="100.0" prefHeight="20.0" prefWidth="206.0" text="Label" textFill="RED" visible="false" />
+      <Label fx:id="passwordErrorLabel" layoutX="76.0" layoutY="102.0" prefHeight="18.0" prefWidth="206.0" text="Label" textFill="RED" visible="false" />
+      <Label fx:id="repeatPasswordLabel" layoutX="76.0" layoutY="150.0" prefHeight="18.0" prefWidth="206.0" text="Label" textFill="RED" visible="false" />
 
     </children>
 </AnchorPane>
