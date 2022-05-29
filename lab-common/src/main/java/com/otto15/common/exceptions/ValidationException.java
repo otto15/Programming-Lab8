@@ -1,4 +1,4 @@
-package com.otto15.client.exceptions;
+package com.otto15.common.exceptions;
 
 import java.util.List;
 
