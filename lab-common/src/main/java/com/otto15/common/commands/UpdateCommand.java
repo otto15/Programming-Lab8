@@ -13,6 +13,10 @@ import java.io.IOException;
 
 public class UpdateCommand extends AbstractCommand {
 
+    public UpdateCommand() {
+        super( "update", "updates person value", 1);
+    }
+
     public UpdateCommand(CommandManager commandManager) {
         super(commandManager, "update", "updates person value", 1);
     }

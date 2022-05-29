@@ -6,7 +6,9 @@ public enum Resources {
     MAIN_WINDOW_PATH("/views/main.fxml"),
     TABLE_PATH("/views/table.fxml"),
     VISUALIZE_PATH("/views/visualize.fxml"),
-    ADD_PATH("/views/add.fxml");
+    ADD_PATH("/views/add.fxml"),
+    UPDATE_PATH("/views/update.fxml"),
+    TABLE_MENU_PATH("/views/tableMenu.fxml");
 
     private final String path;
 

@@ -16,6 +16,10 @@ import java.util.Collections;
  */
 public class AddIfMinCommand extends AbstractCommand {
 
+    public AddIfMinCommand() {
+        super( "add_if_min", "adds new person if minimal value", 0);
+    }
+
     public AddIfMinCommand(CommandManager commandManager) {
         super(commandManager, "add_if_min", "adds new person if minimal value", 0);
     }

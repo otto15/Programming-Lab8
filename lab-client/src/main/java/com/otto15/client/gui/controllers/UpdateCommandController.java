@@ -2,6 +2,7 @@ package com.otto15.client.gui.controllers;
 
 import com.otto15.client.exceptions.AlertException;
 import com.otto15.client.gui.models.CommandModel;
+import com.otto15.common.entities.Person;
 import com.otto15.common.entities.User;
 import com.otto15.common.entities.enums.Color;
 import com.otto15.common.entities.enums.Country;
@@ -13,16 +14,20 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddCommandController extends AbstractController {
+public class UpdateCommandController extends AbstractController {
     private final User user;
+    private final Person person;
     private CommandModel commandModel;
 
+    @FXML
+    private Label idLabel;
     @FXML
     private TextField nameField;
     @FXML
@@ -44,8 +49,9 @@ public class AddCommandController extends AbstractController {
     @FXML
     private TextField zLocationField;
 
-    public AddCommandController(User user) {
+    public UpdateCommandController(User user, Person person) {
         this.user = user;
+        this.person = person;
     }
 
     @Override
@@ -55,6 +61,18 @@ public class AddCommandController extends AbstractController {
         eyeColorComboBox.setItems(FXCollections.observableArrayList(Color.values()));
         hairColorComboBox.setItems(FXCollections.observableArrayList(Color.values()));
         nationalityComboBox.setItems(FXCollections.observableArrayList(Country.values()));
+
+        idLabel.setText(person.getId().toString());
+        nameField.setText(person.getName());
+        xCoordinatesField.setText(String.valueOf(person.getCoordinates().getX()));
+        yCoordinatesField.setText(String.valueOf(person.getCoordinates().getY()));
+        heightField.setText(String.valueOf(person.getHeight()));
+        eyeColorComboBox.setValue(person.getEyeColor());
+        hairColorComboBox.setValue(person.getHairColor());
+        nationalityComboBox.setValue(person.getNationality());
+        xLocationField.setText(String.valueOf(person.getLocation().getX()));
+        yLocationField.setText(String.valueOf(person.getLocation().getY()));
+        zLocationField.setText(String.valueOf(person.getLocation().getZ()));
 
         commandModel.nameProperty().bind(nameField.textProperty());
         commandModel.xCoordinatesProperty().bind(xCoordinatesField.textProperty());
@@ -68,28 +86,12 @@ public class AddCommandController extends AbstractController {
         commandModel.zLocationProperty().bind(zLocationField.textProperty());
     }
 
-    public void addButtonPressed(Event event) {
+    public void updateButtonPressed(Event event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try {
-            commandModel.add(user);
+            commandModel.update(person.getId(), user);
             stage.close();
         } catch (ValidationException e) {
-            e.getValidationErrorsList().forEach(System.out::println);
-            //TODO
-        } catch (AlertException e) {
-            e.showAlert();
-            PerformanceState.getInstance().switchPerformanceStatus();
-            Platform.exit();
-        }
-    }
-
-    public void addIfMinButtonPressed(Event event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        try {
-            commandModel.addIfMin(user);
-            stage.close();
-        } catch (ValidationException e) {
-            e.getValidationErrorsList().forEach(System.out::println);
             //TODO
         } catch (AlertException e) {
             e.showAlert();

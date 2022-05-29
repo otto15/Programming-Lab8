@@ -9,6 +9,10 @@ import com.otto15.common.network.Response;
  */
 public class ClearCommand extends AbstractCommand {
 
+    public ClearCommand() {
+        super( "clear", "deletes all collection elements", 0);
+    }
+
     public ClearCommand(CommandManager commandManager) {
         super(commandManager, "clear", "deletes all collection elements", 0);
     }

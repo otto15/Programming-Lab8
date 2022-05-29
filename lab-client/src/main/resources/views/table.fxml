@@ -18,7 +18,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
-            <TableView fx:id="table" prefHeight="281.0" prefWidth="691.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+            <TableView fx:id="table" onMouseClicked="#rightMouseClicked" prefHeight="281.0" prefWidth="691.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="authorColumn" prefWidth="68.0" text="author" />
                     <TableColumn fx:id="idColumn" minWidth="4.0" prefWidth="39.20001220703125" text="id" />

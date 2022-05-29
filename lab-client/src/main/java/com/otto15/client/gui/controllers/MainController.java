@@ -1,14 +1,15 @@
 package com.otto15.client.gui.controllers;
 
+import com.otto15.client.exceptions.AlertException;
 import com.otto15.client.gui.Localization;
 import com.otto15.client.gui.Resources;
+import com.otto15.client.gui.models.CommandModel;
 import com.otto15.common.entities.User;
 import com.otto15.common.state.PerformanceState;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import java.io.IOException;
@@ -26,9 +27,6 @@ public class MainController extends AbstractController {
     @FXML
     private BorderPane borderPane;
 
-    @FXML
-    private Button tableButton;
-
     public MainController(User user) {
         this.user = user;
     }
@@ -44,11 +42,17 @@ public class MainController extends AbstractController {
     }
 
     public void addButtonPressed(Event event) {
-        openPopupWindow(event, Resources.ADD_PATH, aClass -> new CommandController(user));
+        openPopupWindow(event, Resources.ADD_PATH, aClass -> new AddCommandController(user));
     }
 
     public void clearButtonPressed() {
-
+        try {
+            CommandModel commandModel = new CommandModel();
+            commandModel.clear(user);
+        } catch (AlertException e) {
+            PerformanceState.getInstance().switchPerformanceStatus();
+            Platform.exit();
+        }
     }
 
     public void tableButtonPressed() throws IOException {

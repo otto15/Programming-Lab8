@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="365.0" text="Add" textAlignment="CENTER" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.controllers.CommandController">
+<TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="365.0" text="Add" textAlignment="CENTER" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.controllers.AddCommandController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="385.0" prefWidth="364.0">
          <children>
@@ -62,7 +62,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button layoutX="210.0" layoutY="350.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" text="Add if min">
+            <Button layoutX="210.0" layoutY="350.0" mnemonicParsing="false" onAction="#addIfMinButtonPressed" prefHeight="30.0" prefWidth="110.0" text="Add if min">
                <font>
                   <Font size="14.0" />
                </font>

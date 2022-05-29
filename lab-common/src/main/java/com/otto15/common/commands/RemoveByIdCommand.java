@@ -10,6 +10,10 @@ import java.io.IOException;
 
 public class RemoveByIdCommand extends AbstractCommand {
 
+    public RemoveByIdCommand() {
+        super( "remove_by_id", "removes collection element by id", 1);
+    }
+
     public RemoveByIdCommand(CommandManager commandManager) {
         super(commandManager, "remove_by_id", "removes collection element by id", 1);
     }
