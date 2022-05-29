@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
@@ -48,8 +49,12 @@ public abstract class AbstractController implements Initializable {
             loader.setControllerFactory(callback);
             loader.setResources(localization.getResourceBundle());
 
-            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
+            Stage primaryStage;
+            try {
+                primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            } catch (ClassCastException e) {
+                primaryStage = (Stage) (((MenuItem) event.getSource()).getParentPopup().getOwnerWindow());
+            }
             Parent root = loader.load();
 
             Stage stage = new Stage();
