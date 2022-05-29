@@ -7,6 +7,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -22,10 +23,12 @@ public class MainController extends AbstractController {
 
     @FXML
     private Label usernameLabel;
-    @FXML
-    private GridPane pane;
+
     @FXML
     private BorderPane borderPane;
+
+    @FXML
+    private Button tableButton;
 
     public MainController(User user) {
         this.user = user;
@@ -34,6 +37,11 @@ public class MainController extends AbstractController {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usernameLabel.setText(user.getLogin());
+        try {
+            tableButtonPressed();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addButtonPressed() {
@@ -50,8 +58,8 @@ public class MainController extends AbstractController {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.TABLE_PATH.getPath())));
         loader.setResources(localization.getResourceBundle());
 
-        pane.getChildren().remove(1, 1);
-        pane.add(loader.load(), 1, 1);
+        tableButton.requestFocus();
+        borderPane.setCenter(loader.load());
     }
 
     public void visualizeButtonPressed() throws IOException {
@@ -60,8 +68,7 @@ public class MainController extends AbstractController {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.VISUALIZE_PATH.getPath())));
         loader.setResources(localization.getResourceBundle());
 
-        pane.getChildren().remove(1, 1);
-        pane.add(loader.load(), 1, 1);
+        borderPane.setCenter(loader.load());
     }
 
     public void logoutButtonPressed(Event event) {

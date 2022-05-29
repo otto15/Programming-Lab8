@@ -5,10 +5,10 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<GridPane xmlns="http://javafx.com/javafx"
+<AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.otto15.client.gui.controllers.VisualizeController"
-            prefHeight="400.0" prefWidth="600.0">
-    <Label>нету, включите таблицу</Label>
-</GridPane>
+            fx:controller="com.otto15.client.gui.controllers.VisualizeController">
+    <GridPane prefHeight="400.0" prefWidth="600.0">
+        <Label>нету, включите таблицу</Label>
+    </GridPane>
+</AnchorPane>

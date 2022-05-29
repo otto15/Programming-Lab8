@@ -1,6 +1,6 @@
 @font-face {
     font-family: Spartan;
-    src: url('fonts/LeagueSpartan/static/LeagueSpartan-Bold.ttf');
+    src: url('fonts/LeagueSpartan/static/LeagueSpartan-Bold.ttf') format("truetype");
 }
 
 .top-bar {

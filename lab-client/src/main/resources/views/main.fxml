@@ -4,123 +4,119 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="827.0" styleClass="root" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.controllers.MainController">
-   <top>
-      <AnchorPane fx:id="topBar" prefHeight="69.0" prefWidth="772.0" styleClass="top-bar" BorderPane.alignment="CENTER">
-         <children>
-            <Button layoutX="714.0" layoutY="17.0" mnemonicParsing="false" onAction="#logoutButtonPressed" prefHeight="36.0" prefWidth="98.0" styleClass="log-out-button" text="logout" textFill="#6187e2">
-               <font>
-                  <Font name="League Spartan Medium" size="18.0" />
-               </font></Button>
-            <Label fx:id="usernameLabel" alignment="CENTER" layoutX="611.0" layoutY="15.0" prefHeight="38.0" prefWidth="102.0" text="Username" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="League Spartan Medium" size="18.0" />
-               </font></Label>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="8.0" prefHeight="54.0" prefWidth="168.0" text="{} ObjectVision" textFill="WHITE">
-               <font>
-                  <Font name="League Spartan SemiBold" size="26.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-   </top>
-   <left>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="command-button-panel" BorderPane.alignment="CENTER">
-         <children>
-            <VBox prefHeight="410.0" prefWidth="200.0" spacing="20.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#addButtonPressed" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="Add" textFill="WHITE">
-                     <font>
-                        <Font name="League Spartan Medium" size="18.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="Update" textFill="WHITE">
-                     <font>
-                        <Font name="League Spartan Medium" size="18.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="Execute script" textFill="WHITE">
-                     <font>
-                        <Font name="League Spartan Medium" size="18.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#clearButtonPressed" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="Clear" textFill="WHITE">
-                     <font>
-                        <Font name="League Spartan Medium" size="18.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#exitButtonPressed" prefHeight="26.0" prefWidth="130.0" text="Exit">
-                     <VBox.margin>
-                        <Insets top="90.0" />
-                     </VBox.margin>
-                     <styleClass>
-                        <String fx:value="command-button" />
-                        <String fx:value="exit-button" />
-                     </styleClass>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets left="25.0" top="25.0" />
-               </padding>
-            </VBox>
-         </children>
-      </AnchorPane>
-   </left>
-   <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-<!--            <GridPane fx:id="pane" layoutY="41.0" prefHeight="365.0" prefWidth="518.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="41.0">-->
-<!--              <columnConstraints>-->
-<!--                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />-->
-<!--              </columnConstraints>-->
-<!--              <rowConstraints>-->
-<!--                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />-->
-<!--              </rowConstraints>-->
-<!--               <children>-->
-<!--                  <TableView fx:id="table" prefHeight="281.0" prefWidth="518.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">-->
-<!--                    <columns>-->
-<!--                      <TableColumn fx:id="authorColumn" prefWidth="68.0" text="author" />-->
-<!--                      <TableColumn fx:id="idColumn" minWidth="4.0" prefWidth="39.20001220703125" text="id" />-->
-<!--                        <TableColumn fx:id="nameColumn" prefWidth="64.800048828125" text="name" />-->
-<!--                        <TableColumn fx:id="coordinatesColumn" prefWidth="79.99993896484375" text="coordinates" />-->
-<!--                        <TableColumn fx:id="heightColumn" prefWidth="66.39996337890625" text="height" />-->
-<!--                        <TableColumn fx:id="eyeColorColumn" prefWidth="69.60003662109375" text="eye color" />-->
-<!--                        <TableColumn fx:id="hairColorColumn" prefWidth="75.20001220703125" text="hair color" />-->
-<!--                        <TableColumn fx:id="nationalityColumn" prefWidth="75.0" text="nationality" />-->
-<!--                        <TableColumn fx:id="locationColumn" prefWidth="81.60009765625" text="location" />-->
-<!--                    </columns>-->
-<!--                  </TableView>-->
-<!--               </children>-->
-<!--            </GridPane>-->
-<!--            </children>-->
-            <HBox layoutX="366.0" prefHeight="42.0" prefWidth="246.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#tableButtonPressed" prefHeight="26.0" prefWidth="54.0" text="Table">
-                     <styleClass>
-                        <String fx:value="selection-button" />
-                        <String fx:value="left-selection-button" />
-                     </styleClass>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#visualizeButtonPressed" prefHeight="27.0" prefWidth="57.0" text="Visualize" HBox.hgrow="ALWAYS">
-                     <styleClass>
-                        <String fx:value="selection-button" />
-                        <String fx:value="right-selection-button" />
-                     </styleClass>
-                  </Button>
-               </children>
-            </HBox>
-         </children>
-      </AnchorPane>
-   </center>
+    <top>
+        <AnchorPane prefHeight="101.0" prefWidth="827.0">
+            <AnchorPane fx:id="topBar" prefHeight="70.0" prefWidth="827.0" styleClass="top-bar" BorderPane.alignment="CENTER">
+                <children>
+                    <Button layoutX="714.0" layoutY="17.0" mnemonicParsing="false" onAction="#logoutButtonPressed" prefHeight="36.0" prefWidth="98.0" styleClass="log-out-button" text="logout" textFill="#6187e2">
+                        <font>
+                            <Font name="League Spartan Medium" size="18.0" />
+                        </font>
+                    </Button>
+                    <Label fx:id="usernameLabel" alignment="CENTER" layoutX="611.0" layoutY="15.0" prefHeight="38.0" prefWidth="102.0" text="Username" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                            <Font name="League Spartan Medium" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label alignment="CENTER" layoutX="14.0" layoutY="8.0" prefHeight="54.0" prefWidth="168.0" text="{} ObjectVision" textFill="WHITE">
+                        <font>
+                            <Font name="League Spartan SemiBold" size="26.0" />
+                        </font>
+                    </Label>
+                </children>
+            </AnchorPane>
+             <!--            <GridPane fx:id="pane" layoutY="41.0" prefHeight="365.0" prefWidth="518.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="41.0">-->
+             <!--              <columnConstraints>-->
+             <!--                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />-->
+             <!--              </columnConstraints>-->
+             <!--              <rowConstraints>-->
+             <!--                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />-->
+             <!--              </rowConstraints>-->
+             <!--               <children>-->
+             <!--                  <TableView fx:id="table" prefHeight="281.0" prefWidth="518.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">-->
+             <!--                    <columns>-->
+             <!--                      <TableColumn fx:id="authorColumn" prefWidth="68.0" text="author" />-->
+             <!--                      <TableColumn fx:id="idColumn" minWidth="4.0" prefWidth="39.20001220703125" text="id" />-->
+             <!--                        <TableColumn fx:id="nameColumn" prefWidth="64.800048828125" text="name" />-->
+             <!--                        <TableColumn fx:id="coordinatesColumn" prefWidth="79.99993896484375" text="coordinates" />-->
+             <!--                        <TableColumn fx:id="heightColumn" prefWidth="66.39996337890625" text="height" />-->
+             <!--                        <TableColumn fx:id="eyeColorColumn" prefWidth="69.60003662109375" text="eye color" />-->
+             <!--                        <TableColumn fx:id="hairColorColumn" prefWidth="75.20001220703125" text="hair color" />-->
+             <!--                        <TableColumn fx:id="nationalityColumn" prefWidth="75.0" text="nationality" />-->
+             <!--                        <TableColumn fx:id="locationColumn" prefWidth="81.60009765625" text="location" />-->
+             <!--                    </columns>-->
+             <!--                  </TableView>-->
+             <!--               </children>-->
+             <!--            </GridPane>-->
+             <!--            </children>-->
+             <HBox layoutX="566.0" layoutY="66.0" prefHeight="42.0" prefWidth="246.0">
+                 <children>
+                     <Button fx:id="tableButton" mnemonicParsing="false" onAction="#tableButtonPressed" prefHeight="26.0" prefWidth="54.0" text="Table">
+                         <styleClass>
+                             <String fx:value="selection-button" />
+                             <String fx:value="left-selection-button" />
+                         </styleClass>
+                     </Button>
+                     <Button mnemonicParsing="false" onAction="#visualizeButtonPressed" prefHeight="27.0" prefWidth="57.0" text="Visualize" HBox.hgrow="ALWAYS">
+                         <styleClass>
+                             <String fx:value="selection-button" />
+                             <String fx:value="right-selection-button" />
+                         </styleClass>
+                     </Button>
+                 </children>
+             </HBox>
+        </AnchorPane>
+    </top>
+    <left>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="command-button-panel" BorderPane.alignment="CENTER">
+            <children>
+                <VBox prefHeight="372.0" prefWidth="200.0" spacing="20.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#addButtonPressed" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="Add" textFill="WHITE">
+                            <font>
+                                <Font name="League Spartan Medium" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="Update" textFill="WHITE">
+                            <font>
+                                <Font name="League Spartan Medium" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="Execute script" textFill="WHITE">
+                            <font>
+                                <Font name="League Spartan Medium" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#clearButtonPressed" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="Clear" textFill="WHITE">
+                            <font>
+                                <Font name="League Spartan Medium" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#exitButtonPressed" prefHeight="26.0" prefWidth="130.0" text="Exit">
+                            <VBox.margin>
+                                <Insets top="60.0" />
+                            </VBox.margin>
+                            <styleClass>
+                                <String fx:value="command-button" />
+                                <String fx:value="exit-button" />
+                            </styleClass>
+                        </Button>
+                    </children>
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </left>
+    <center>
+
+    </center>
 </BorderPane>
