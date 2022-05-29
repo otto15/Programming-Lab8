@@ -1,7 +1,7 @@
 package com.otto15.client.gui.controllers;
 
 import com.otto15.client.exceptions.LostConnectionException;
-import com.otto15.client.exceptions.ValidationException;
+import com.otto15.common.exceptions.ValidationException;
 import com.otto15.client.gui.Resources;
 import com.otto15.client.gui.models.AuthModel;
 import com.otto15.common.network.Response;
@@ -12,11 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -44,7 +41,6 @@ public class LoginController extends AbstractController {
 
     public void switchToRegisterScene(Event event) {
         switchScene(event, Resources.REGISTER_WINDOW_PATH, (aClass -> new RegisterController()));
-
     }
 
     public void logInButtonPressed(Event event) {

@@ -1,7 +1,7 @@
 package com.otto15.client.gui.models;
 
 import com.otto15.client.exceptions.LostConnectionException;
-import com.otto15.client.exceptions.ValidationException;
+import com.otto15.common.exceptions.ValidationException;
 import com.otto15.client.listeners.ClientNetworkListener;
 import com.otto15.common.commands.SignInCommand;
 
