@@ -51,34 +51,6 @@ public class TableController extends AbstractController {
         nationalityColumn.setCellValueFactory(new PropertyValueFactory<>("nationality"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
 
-        persons = FXCollections.observableArrayList(new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)),
-                new Person("rbtsfbd", new Coordinates(5, 6d), 167, Color.BLUE, Color.BLUE, Country.CHINA, new Location(12d, 34L, 2.3f)));
 
         table.setItems(persons);
     }
