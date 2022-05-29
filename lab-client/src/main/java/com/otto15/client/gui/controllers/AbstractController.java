@@ -10,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -32,6 +34,29 @@ public abstract class AbstractController implements Initializable {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void openPopupWindow(Event event, Resources resources, Callback<Class<?>, Object> callback) {
+        try {
+            Localization localization = new Localization();
+
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(resources.getPath())));
+            loader.setControllerFactory(callback);
+            loader.setResources(localization.getResourceBundle());
+
+            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(primaryStage);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
