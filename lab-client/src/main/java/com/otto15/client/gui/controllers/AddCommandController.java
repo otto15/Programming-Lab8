@@ -2,6 +2,7 @@ package com.otto15.client.gui.controllers;
 
 import com.otto15.client.exceptions.LostConnectionException;
 import com.otto15.client.gui.models.CommandModel;
+import com.otto15.common.entities.Person;
 import com.otto15.common.entities.User;
 import com.otto15.common.entities.enums.Color;
 import com.otto15.common.entities.enums.Country;
@@ -70,7 +71,7 @@ public class CommandController extends AbstractController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try {
             commandModel.add(user);
-            System.out.println("niceeee");
+            stage.close();
         } catch (ValidationException e) {
             e.getValidationErrorsList().forEach(System.out::println);
             //TODO
@@ -78,5 +79,23 @@ public class CommandController extends AbstractController {
             e.showAlert();
             ((Stage) stage.getOwner()).close();
         }
+    }
+
+    public void addIfMinButtonPressed(Event event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try {
+            commandModel.addIfMin(user);
+            stage.close();
+        } catch (ValidationException e) {
+            e.getValidationErrorsList().forEach(System.out::println);
+            //TODO
+        } catch (LostConnectionException e) {
+            e.showAlert();
+            ((Stage) stage.getOwner()).close();
+        }
+    }
+
+    public void updateButtonPressed(Event event) {
+
     }
 }

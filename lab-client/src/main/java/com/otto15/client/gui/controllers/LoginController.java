@@ -1,6 +1,6 @@
 package com.otto15.client.gui.controllers;
 
-import com.otto15.client.exceptions.LostConnectionException;
+import com.otto15.client.exceptions.AlertException;
 import com.otto15.common.exceptions.ValidationException;
 import com.otto15.client.gui.Resources;
 import com.otto15.client.gui.models.AuthModel;
@@ -56,7 +56,7 @@ public class LoginController extends AbstractController {
             List<TextField> errorFields = Arrays.asList(usernameField, passwordField);
             List<Label> errorLabels = Arrays.asList(usernameErrorLabel, passwordErrorLabel);
             showErrors(errorFields, errorLabels, validationErrorsList);
-        } catch (LostConnectionException e) {
+        } catch (AlertException e) {
             e.showAlert();
             stage.close();
         }
