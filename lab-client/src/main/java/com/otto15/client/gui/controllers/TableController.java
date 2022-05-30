@@ -99,6 +99,7 @@ public class TableController extends AbstractController {
                     updateIfChanged(tableModel.getPersons());
                 }
             } catch (AlertException e) {
+
                 e.showAlert();
             }
         }, delay, period, TimeUnit.MILLISECONDS);
