@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import java.util.Objects;
 
 /**
  * Represent person with its properties.
@@ -153,6 +154,19 @@ public class Person implements Comparable<Person>, Serializable {
             throw new IllegalArgumentException("Nationality field can not be empty.");
         }
         this.nationality = nationality;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return height == person.height && id.equals(person.id) && creationDate.equals(person.creationDate) && name.equals(person.name) && author.equals(person.author) && coordinates.equals(person.coordinates) && eyeColor == person.eyeColor && hairColor == person.hairColor && nationality == person.nationality && location.equals(person.location);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, creationDate, name, author, coordinates, height, eyeColor, hairColor, nationality, location);
     }
 
     @Override

@@ -163,9 +163,6 @@ public final class PersonValidator {
         }
 
         try {
-            if (eyeColor == null) {
-                throw new IllegalArgumentException("You have to choose an eye color");
-            }
             person.setEyeColor(eyeColor);
             validationErrorsList.add(null);
         } catch (IllegalArgumentException e) {
@@ -173,9 +170,6 @@ public final class PersonValidator {
         }
 
         try {
-            if (hairColor == null) {
-                throw new IllegalArgumentException("You have to choose an hair color");
-            }
             person.setHairColor(hairColor);
             validationErrorsList.add(null);
         } catch (IllegalArgumentException e) {

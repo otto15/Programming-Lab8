@@ -5,11 +5,13 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
+import java.util.Comparator;
+import java.util.Objects;
 
 /**
  * Represent coordinates by x, y arguments.
  */
-public class Coordinates implements Serializable {
+public class Coordinates implements Serializable, Comparable<Coordinates> {
     public static final double X_MAX_VALUE = 867;
     public static final double Y_MIN_VALUE = -73;
 
@@ -37,20 +39,30 @@ public class Coordinates implements Serializable {
         return x;
     }
 
-    public void setX(double x) {
-        this.x = x;
-    }
-
     public Double getY() {
         return y;
     }
 
-    public void setY(Double y) {
-        this.y = y;
+    @Override
+    public String toString() {
+        return x + "; " + y;
     }
 
     @Override
-    public String toString() {
-        return "[x: " + x + ", y: " + y + "]";
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Coordinates that = (Coordinates) o;
+        return Double.compare(that.x, x) == 0 && y.equals(that.y);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+    @Override
+    public int compareTo(Coordinates otherCoordinates) {
+        return Comparator.comparing(Coordinates::getX).thenComparing(Coordinates::getY).compare(this, otherCoordinates);
     }
 }
