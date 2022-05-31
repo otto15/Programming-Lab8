@@ -83,6 +83,7 @@ public class TableModel {
                 }
             }
         }
+//        persons.setValue(persons.get());
         persons.removeIf(person -> !newPersonsList.contains(person));
     }
 

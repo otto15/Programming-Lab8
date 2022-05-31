@@ -6,13 +6,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane prefHeight="358.0" prefWidth="689.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.controllers.VisualizeController">
+<AnchorPane fx:id="anchorPane" prefHeight="358.0" prefWidth="689.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.controllers.VisualizeController">
    <children>
       <ImageView fx:id="imageView" fitHeight="355.0" fitWidth="569.0" layoutX="42.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../tatarstan.jpg" />
+            <Image url="@../images/tatarstan.jpg" />
          </image>
       </ImageView>
-      <Canvas fx:id="canvas" height="355.0" layoutX="42.0" layoutY="2.0" width="533.0" />
    </children>
 </AnchorPane>

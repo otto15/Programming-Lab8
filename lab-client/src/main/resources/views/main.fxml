@@ -13,7 +13,7 @@
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="853.0" styleClass="root" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.controllers.MainController">
     <top>
         <AnchorPane prefHeight="101.0" prefWidth="827.0">
-            <AnchorPane fx:id="topBar" prefHeight="70.0" prefWidth="853.0" styleClass="top-bar" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="70.0" prefWidth="853.0" styleClass="top-bar" BorderPane.alignment="CENTER">
                 <children>
                     <Button layoutX="741.0" layoutY="17.0" mnemonicParsing="false" onAction="#logoutButtonPressed" prefHeight="36.0" prefWidth="98.0" styleClass="log-out-button" text="logout" textFill="#6187e2">
                         <font>

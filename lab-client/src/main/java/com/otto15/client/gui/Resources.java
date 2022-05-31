@@ -8,7 +8,8 @@ public enum Resources {
     VISUALIZE_PATH("/views/visualize.fxml"),
     ADD_PATH("/views/add.fxml"),
     UPDATE_PATH("/views/update.fxml"),
-    TABLE_MENU_PATH("/views/tableMenu.fxml");
+    TABLE_MENU_PATH("/views/tableMenu.fxml"),
+    INFO_PATH("/views/info.fxml");
 
     private final String path;
 
