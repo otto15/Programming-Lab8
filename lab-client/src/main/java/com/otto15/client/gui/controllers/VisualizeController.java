@@ -35,6 +35,7 @@ public class VisualizeController extends AbstractController {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         tableModel.getPersons().forEach(this::drawPerson);
         tableModel.personsProperty().addListener((observableValue, oldList, newList) -> {
             peoples.forEach(canvas1 -> {
@@ -51,8 +52,8 @@ public class VisualizeController extends AbstractController {
         Coordinates coordinates = person.getCoordinates();
 
         Canvas personCanvas = new Canvas(14, 39);
-        personCanvas.setLayoutX(calculateX(coordinates.getX() / 2));
-        personCanvas.setLayoutY(calculateY(coordinates.getY() / 2));
+        personCanvas.setLayoutX(calculateX(coordinates.getX() / 5));
+        personCanvas.setLayoutY(calculateY(coordinates.getY() / 5));
 
         GraphicsContext graphicsContext = personCanvas.getGraphicsContext2D();
         graphicsContext.setFill(Color.BLACK);
