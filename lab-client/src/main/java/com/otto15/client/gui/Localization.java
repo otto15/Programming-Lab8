@@ -6,23 +6,23 @@ import java.util.ResourceBundle;
 
 public class Localization {
 
-    private final Locale currentLocale = Locale.getDefault();
-    private final Locale enUsLocale = new Locale("en", "US");
-    private final Locale ruRuLocale = new Locale("ru", "RU");
-    private final Locale esHnLocale = new Locale("es", "HN");
-    private final Locale trTrLocale = new Locale("tr", "TR");
-    private final Locale ukUALocale = new Locale("uk", "UA");
     private ResourceBundle resourceBundle;
 
     public Localization() {
         try {
-            resourceBundle = ResourceBundle.getBundle("bundles.text", ukUALocale);
+            Locale currentLocale = Locale.getDefault();
+            resourceBundle = ResourceBundle.getBundle("bundles.text", currentLocale);
         } catch (MissingResourceException e) {
-            resourceBundle = ResourceBundle.getBundle("bundles.text", enUsLocale);
+            resourceBundle = ResourceBundle.getBundle("bundles.text", Locales.EN_US_LOCALE.getLocale());
         }
     }
 
     public ResourceBundle getResourceBundle() {
         return resourceBundle;
     }
+
+    public void setResourceBundle(Locale locale) {
+        resourceBundle = ResourceBundle.getBundle("bundles.text", locale);
+    }
+
 }

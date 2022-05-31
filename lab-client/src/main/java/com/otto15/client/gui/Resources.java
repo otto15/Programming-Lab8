@@ -7,6 +7,8 @@ public enum Resources {
     TABLE_PATH("/views/table.fxml"),
     VISUALIZE_PATH("/views/visualize.fxml"),
     ADD_PATH("/views/add.fxml"),
+    ADD_IF_MIN_PATH("/views/addIfMin.fxml"),
+    REMOVE_GREATER_PATH("/views/removeGreater.fxml"),
     UPDATE_PATH("/views/update.fxml"),
     TABLE_MENU_PATH("/views/tableMenu.fxml"),
     INFO_PATH("/views/info.fxml");
