@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -77,6 +78,16 @@ public abstract class AbstractController implements Initializable {
             errorFields.get(i).setText("");
             errorLabels.get(i).setText(errorMessage);
             errorLabels.get(i).setVisible(true);
+        }
+    }
+
+    public void addRegex(TextField... textFields) {
+        for (TextField t : textFields) {
+            t.addEventFilter(KeyEvent.KEY_TYPED, keyEvent -> {
+                if (!"9876543210-".contains(keyEvent.getCharacter())) {
+                    keyEvent.consume();
+                }
+            });
         }
     }
 }

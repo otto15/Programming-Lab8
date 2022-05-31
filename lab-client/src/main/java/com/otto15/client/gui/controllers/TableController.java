@@ -1,33 +1,30 @@
 package com.otto15.client.gui.controllers;
 
-import com.otto15.client.exceptions.AlertException;
 import com.otto15.client.gui.Resources;
 import com.otto15.client.gui.models.TableModel;
 import com.otto15.common.entities.Coordinates;
 import com.otto15.common.entities.Location;
 import com.otto15.common.entities.Person;
 import com.otto15.common.entities.User;
-import com.otto15.common.state.PerformanceState;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class TableController extends AbstractController {
 
@@ -53,6 +50,24 @@ public class TableController extends AbstractController {
     private TableColumn<Person, String> nationalityColumn;
     @FXML
     private TableColumn<Person, Location> locationColumn;
+    @FXML
+    private TextField authorFilter;
+    @FXML
+    private TextField idFilter;
+    @FXML
+    private TextField nameFilter;
+    @FXML
+    private TextField coordinatesFilter;
+    @FXML
+    private TextField heightFilter;
+    @FXML
+    private TextField eyeColorFilter;
+    @FXML
+    private TextField hairColorFilter;
+    @FXML
+    private TextField nationalityFilter;
+    @FXML
+    private TextField locationFilter;
 
     TableModel tableModel;
 
@@ -74,39 +89,37 @@ public class TableController extends AbstractController {
         nationalityColumn.setCellValueFactory(new PropertyValueFactory<>("nationality"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
 
-        launchUpdatingPersons();
+        tableModel.launchUpdatingPersons();
+
+        applyFilters();
     }
 
-    public void launchUpdatingPersons() {
-        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        PerformanceState performanceState = PerformanceState.getInstance();
-
-        long delay = 0;
-        long period = 5000L;
-        executor.scheduleAtFixedRate(() -> {
-            if (!performanceState.getPerformanceStatus()) {
-                executor.shutdown();
-            }
-            try {
-                tableModel.getNewCollection();
-
-                List<Person> tablePersons = table.getItems().stream().sorted().toList();
-                List<Person> serverPersons = tableModel.getPersons().stream().sorted().toList();
-//                System.out.println(tablePersons.equals(serverPersons));
-//                System.out.println();
-                //TODO this ******* ****
-                if (!table.getItems().sorted().equals(tableModel.getPersons().sorted())) {
-                    updateIfChanged(tableModel.getPersons());
-                }
-            } catch (AlertException e) {
-
-                e.showAlert();
-            }
-        }, delay, period, TimeUnit.MILLISECONDS);
-    }
-
-    public void updateIfChanged(ObservableList<Person> persons) {
-        table.setItems(persons);
+    public void applyFilters() {
+        FilteredList<Person> filteredList = new FilteredList<>(tableModel.getPersons());
+        authorFilter.textProperty().addListener((observableValue, oldValue, newValue)
+                -> filteredList.setPredicate(person -> person.getAuthor().startsWith(newValue)));
+        idFilter.textProperty().addListener((observableValue, oldValue, newValue)
+                -> filteredList.setPredicate(person -> String.valueOf(person.getId()).startsWith(newValue)));
+        nameFilter.textProperty().addListener((observableValue, oldValue, newValue)
+                -> filteredList.setPredicate(person -> person.getName().startsWith(newValue)));
+        coordinatesFilter.textProperty().addListener((observableValue, oldValue, newValue)
+                -> filteredList.setPredicate(person -> person.getCoordinates().toString().startsWith(newValue)));
+        heightFilter.textProperty().addListener((observableValue, oldValue, newValue)
+                -> filteredList.setPredicate(person -> String.valueOf(person.getHeight()).startsWith(newValue)));
+        eyeColorFilter.textProperty().addListener((observableValue, oldValue, newValue)
+                -> filteredList.setPredicate(person -> (person.getEyeColor() == null ? "" : person.getEyeColor().name()).toLowerCase(Locale.ROOT)
+                .startsWith(newValue.toLowerCase(Locale.ROOT))));
+        hairColorFilter.textProperty().addListener((observableValue, oldValue, newValue)
+                -> filteredList.setPredicate(person -> (person.getHairColor() == null ? "" : person.getHairColor().name()).toLowerCase(Locale.ROOT)
+                .startsWith(newValue.toLowerCase(Locale.ROOT))));
+        nationalityFilter.textProperty().addListener((observableValue, oldValue, newValue)
+                -> filteredList.setPredicate(person -> person.getNationality().name().toLowerCase(Locale.ROOT)
+                .startsWith(newValue.toLowerCase(Locale.ROOT))));
+        locationFilter.textProperty().addListener((observableValue, oldValue, newValue)
+                -> filteredList.setPredicate(person -> person.getLocation().toString().startsWith(newValue)));
+        SortedList<Person> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(table.comparatorProperty());
+        table.setItems(sortedList);
     }
 
     public void rightMouseClicked(Event event) {

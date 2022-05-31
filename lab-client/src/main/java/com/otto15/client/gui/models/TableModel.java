@@ -1,5 +1,6 @@
 package com.otto15.client.gui.models;
 
+import com.otto15.client.ConnectionHandler;
 import com.otto15.client.exceptions.AlertException;
 import com.otto15.client.listeners.ClientNetworkListener;
 import com.otto15.common.commands.ShowCommand;
@@ -8,12 +9,20 @@ import com.otto15.common.entities.User;
 import com.otto15.common.network.NetworkListener;
 import com.otto15.common.network.Request;
 import com.otto15.common.network.Response;
+import com.otto15.common.state.PerformanceState;
+import javafx.application.Platform;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class TableModel {
 
@@ -37,10 +46,50 @@ public class TableModel {
         Response response;
         try {
             response = networkListener.listen(new Request(new ShowCommand(), new Object[]{user}));
-            persons = new SimpleListProperty<>(FXCollections.observableArrayList(response.getPersons()));
+            Platform.runLater(() -> updateCollection(response.getPersons()));
         } catch (IOException e) {
             throw new AlertException("Server isn't available, try later");
         }
+    }
+
+    public void launchUpdatingPersons() {
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        PerformanceState performanceState = PerformanceState.getInstance();
+
+        long delay = 0;
+        long period = 5000L;
+        executor.scheduleAtFixedRate(() -> {
+            if (!performanceState.getPerformanceStatus()) {
+                executor.shutdown();
+            }
+            try {
+                getNewCollection();
+//                System.out.println(tablePersons.equals(serverPersons));
+//                System.out.println();
+                //TODO this ******* ****
+                //updateIfChanged();
+            } catch (AlertException e) {
+                Platform.runLater(e::showAlert);
+            }
+            if (executor.isShutdown()) {
+                ConnectionHandler.getInstance().close();
+            }
+        }, delay, period, TimeUnit.MILLISECONDS);
+    }
+
+    public void updateCollection(Collection<Person> newPersonsList) {
+        for (Person person : newPersonsList) {
+            if (!persons.contains(person)) {
+                persons.add(person);
+            } else {
+                Person personFromTableList = persons.stream().filter((p) -> Objects.equals(p.getId(), person.getId())).toList().get(0);
+                if (!person.equals(personFromTableList)) {
+                    persons.remove(personFromTableList);
+                    persons.add(person);
+                }
+            }
+        }
+        persons.removeIf(person -> !newPersonsList.contains(person));
     }
 
     public ObservableList<Person> getPersons() {

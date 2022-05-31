@@ -1,8 +1,10 @@
 package com.otto15.client;
 
 
+import com.otto15.client.listeners.ClientNetworkListener;
 import com.otto15.common.exceptions.EndOfStreamException;
 import com.otto15.common.io.DataReader;
+import com.otto15.common.network.NetworkListener;
 import com.otto15.common.state.PerformanceState;
 
 import java.io.IOException;
@@ -24,6 +26,17 @@ public final class ConnectionHandler {
 
     public ConnectionHandler(PerformanceState performanceState) {
         this.performanceState = performanceState;
+    }
+
+    public static class ConnectionHandlerHolder {
+        public static final ConnectionHandler HOLDER_INSTANCE =
+                new ConnectionHandler(
+                        PerformanceState.getInstance());
+    }
+
+
+    public static ConnectionHandler getInstance() {
+        return ConnectionHandlerHolder.HOLDER_INSTANCE;
     }
 
     public PerformanceState getPerformanceState() {

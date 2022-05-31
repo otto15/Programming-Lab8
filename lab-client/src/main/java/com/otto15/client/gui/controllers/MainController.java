@@ -1,5 +1,6 @@
 package com.otto15.client.gui.controllers;
 
+import com.otto15.client.ConnectionHandler;
 import com.otto15.client.exceptions.AlertException;
 import com.otto15.client.gui.Localization;
 import com.otto15.client.gui.Resources;
@@ -7,9 +8,11 @@ import com.otto15.client.gui.models.CommandModel;
 import com.otto15.common.entities.User;
 import com.otto15.common.state.PerformanceState;
 import javafx.application.Platform;
+import javafx.css.PseudoClass;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import java.io.IOException;
@@ -23,7 +26,8 @@ public class MainController extends AbstractController {
 
     @FXML
     private Label usernameLabel;
-
+    @FXML
+    private Button tableButton;
     @FXML
     private BorderPane borderPane;
 
@@ -56,6 +60,7 @@ public class MainController extends AbstractController {
     }
 
     public void tableButtonPressed() throws IOException {
+        tableButton.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), true);
         Localization localization = new Localization();
 
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.TABLE_PATH.getPath())));
@@ -66,6 +71,7 @@ public class MainController extends AbstractController {
     }
 
     public void visualizeButtonPressed() throws IOException {
+        tableButton.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), false);
         Localization localization = new Localization();
 
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.VISUALIZE_PATH.getPath())));

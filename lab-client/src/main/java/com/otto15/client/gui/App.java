@@ -1,5 +1,7 @@
 package com.otto15.client.gui;
 
+import com.otto15.client.ConnectionHandler;
+import com.otto15.client.listeners.ClientNetworkListener;
 import com.otto15.common.state.PerformanceState;
 import javafx.application.Application;
 import javafx.application.Platform;

@@ -96,7 +96,7 @@ public class CommandModel {
 
         Response response;
         try {
-            response = networkListener.listen(new Request(new AddCommand(), new Object[] {person, user}));
+            response = networkListener.listen(new Request(new AddCommand(), new Object[]{person, user}));
         } catch (IOException e) {
             throw new AlertException("Server isn't available, try later", e);
         }
@@ -109,7 +109,7 @@ public class CommandModel {
 
         Response response;
         try {
-            response = networkListener.listen(new Request(new AddIfMinCommand(), new Object[] {person, user}));
+            response = networkListener.listen(new Request(new AddIfMinCommand(), new Object[]{person, user}));
         } catch (IOException e) {
             throw new AlertException("Server isn't available, try later", e);
         }
@@ -120,10 +120,9 @@ public class CommandModel {
     public Response update(long id, User user) throws ValidationException, AlertException {
         Person person = PersonValidator.validatePersonFromString(name.get(), xCoordinates.get(), yCoordinates.get(), height.get(), eyeColor.get(), hairColor.get(), nationality.get(), xLocation.get(), yLocation.get(), zLocation.get());
         person.setId(id);
-
         Response response;
         try {
-            response = networkListener.listen(new Request(new UpdateCommand(), new Object[] {person, user}));
+            response = networkListener.listen(new Request(new UpdateCommand(), new Object[]{person, user}));
         } catch (IOException e) {
             throw new AlertException("Server isn't available, try later", e);
         }
@@ -134,7 +133,7 @@ public class CommandModel {
     public Response remove(long id, User user) throws AlertException {
         Response response;
         try {
-            response = networkListener.listen(new Request(new RemoveByIdCommand(), new Object[] {id, user}));
+            response = networkListener.listen(new Request(new RemoveByIdCommand(), new Object[]{id, user}));
         } catch (IOException e) {
             throw new AlertException("Server isn't available, try later", e);
         }
@@ -146,11 +145,13 @@ public class CommandModel {
         //TODO где проверять на владельца?
         Response response;
         try {
-            response = networkListener.listen(new Request(new ClearCommand(), new Object[] {user}));
+            response = networkListener.listen(new Request(new ClearCommand(), new Object[]{user}));
         } catch (IOException e) {
             throw new AlertException("Server isn't available, try later", e);
         }
 
         return response;
     }
+
+
 }

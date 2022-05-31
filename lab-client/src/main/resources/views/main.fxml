@@ -84,11 +84,11 @@
                                 <Font name="League Spartan Medium" size="18.0" />
                             </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="Update" textFill="WHITE">
-                            <font>
-                                <Font name="League Spartan Medium" size="18.0" />
-                            </font>
-                        </Button>
+<!--                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="Update" textFill="WHITE">-->
+<!--                            <font>-->
+<!--                                <Font name="League Spartan Medium" size="18.0" />-->
+<!--                            </font>-->
+<!--                        </Button>-->
                         <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="Execute script" textFill="WHITE">
                             <font>
                                 <Font name="League Spartan Medium" size="18.0" />

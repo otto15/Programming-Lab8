@@ -35,7 +35,10 @@ HBox {
 }
 
 .selection-button {
+    -fx-font-family: "League Spartan Medium";
+    -fx-text-fill: #6187e2;
     -fx-pref-width: 80px;
+    -fx-font-size: 16px;
     -fx-background-color: #FFFFFF;
     -fx-border-color: linear-gradient(from 0% 0% to 100% 60%, #493FC0 0%, rgba(78, 180, 255, 0.74) 100%);
     -fx-collapsible: true;
@@ -43,6 +46,12 @@ HBox {
 
 .selection-button:focused {
     -fx-background-color: linear-gradient(from 0% 0% to 100% 60%, #493FC0 0%, rgba(78, 180, 255, 0.74) 100%);
+    -fx-text-fill: #FFFFFF;
+}
+
+.selection-button:selected {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 60%, #493FC0 0%, rgba(78, 180, 255, 0.74) 100%);
+    -fx-text-fill: #FFFFFF;
 }
 
 .left-selection-button {

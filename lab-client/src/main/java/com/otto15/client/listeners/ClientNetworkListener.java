@@ -25,15 +25,13 @@ public final class ClientNetworkListener implements NetworkListener {
 
     public static class NetworkListenerHolder {
         public static final NetworkListener HOLDER_INSTANCE = new ClientNetworkListener(
-                new ConnectionHandler(
-                        PerformanceState.getInstance()));
+                ConnectionHandler.getInstance());
     }
 
 
     public static NetworkListener getInstance() {
         return NetworkListenerHolder.HOLDER_INSTANCE;
     }
-
 
     @Override
     public synchronized Response listen(Request request) throws IOException {
