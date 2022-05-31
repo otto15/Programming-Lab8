@@ -9,7 +9,6 @@ import com.otto15.client.gui.models.TableModel;
 import com.otto15.common.entities.User;
 import com.otto15.common.state.PerformanceState;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.css.PseudoClass;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -19,10 +18,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -42,19 +41,42 @@ public class MainController extends AbstractController {
     private BorderPane borderPane;
     @FXML
     private ComboBox<Locales> languageComboBox;
+    private static boolean lastViewWasVisualisation = false;
 
     public MainController(User user) {
         this.user = user;
-        tableModel = new TableModel(user);
+        tableModel = TableModel.getInstance(user);
         commandModel = new CommandModel();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usernameLabel.setText(user.getLogin());
-        languageComboBox.setItems(FXCollections.observableArrayList(Locales.values()));
+
+        languageComboBox.setValue(Localization.getInstance().getLocales());
+        languageComboBox.getItems().setAll(Locales.values());
+        languageComboBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Locales locales) {
+                return locales.getRepresentation();
+            }
+
+            @Override
+            public Locales fromString(String s) {
+                for (Locales locale : Locales.values()) {
+                    if (s.equals(locale.getRepresentation())) {
+                        return locale;
+                    }
+                }
+                return null;
+            }
+        });
         try {
-            tableButtonPressed();
+            if (lastViewWasVisualisation) {
+                visualizeButtonPressed();
+            } else {
+                tableButtonPressed();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,9 +97,10 @@ public class MainController extends AbstractController {
     }
 
     public void tableButtonPressed() throws IOException {
+        lastViewWasVisualisation = false;
         visualizeButton.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), false);
         tableButton.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), true);
-        Localization localization = new Localization();
+        Localization localization = Localization.getInstance();
 
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.TABLE_PATH.getPath())));
         loader.setControllerFactory(aClass -> new TableController(tableModel));
@@ -87,9 +110,10 @@ public class MainController extends AbstractController {
     }
 
     public void visualizeButtonPressed() throws IOException {
+        lastViewWasVisualisation = true;
         visualizeButton.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), true);
         tableButton.pseudoClassStateChanged(PseudoClass.getPseudoClass("selected"), false);
-        Localization localization = new Localization();
+        Localization localization = Localization.getInstance();
 
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.VISUALIZE_PATH.getPath())));
         loader.setControllerFactory(aClass -> new VisualizeController(tableModel));
@@ -127,8 +151,10 @@ public class MainController extends AbstractController {
     }
 
     public void comboAction(Event event) {
-        Localization localization = new Localization();
-        localization.setResourceBundle(languageComboBox.getValue().getLocale());
+        Localization localization = Localization.getInstance();
+        localization.setResourceBundle(languageComboBox.getValue());
+        languageComboBox.setValue(languageComboBox.getValue());
+        switchScene(event, Resources.MAIN_WINDOW_PATH, aClass -> new MainController(user));
     }
 
 }

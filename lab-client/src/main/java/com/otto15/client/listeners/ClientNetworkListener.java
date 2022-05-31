@@ -18,12 +18,12 @@ public final class ClientNetworkListener implements NetworkListener {
     private final ConnectionHandler connectionHandler;
     private final Reader reader = new InputStreamReader(System.in);
 
-    public ClientNetworkListener(ConnectionHandler connectionHandler) {
+    private ClientNetworkListener(ConnectionHandler connectionHandler) {
         this.connectionHandler = connectionHandler;
     }
 
 
-    public static class NetworkListenerHolder {
+    private static class NetworkListenerHolder {
         public static final NetworkListener HOLDER_INSTANCE = new ClientNetworkListener(
                 ConnectionHandler.getInstance());
     }

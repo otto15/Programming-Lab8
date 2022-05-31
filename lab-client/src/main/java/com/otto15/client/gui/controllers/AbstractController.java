@@ -25,7 +25,7 @@ public abstract class AbstractController implements Initializable {
 
     public void switchScene(Event event, Resources resources, Callback<Class<?>, Object> callback) {
         try {
-            Localization localization = new Localization();
+            Localization localization = Localization.getInstance();
 
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(resources.getPath())));
             loader.setControllerFactory(callback);
@@ -44,7 +44,7 @@ public abstract class AbstractController implements Initializable {
 
     public void openPopupWindow(Event event, Resources resources, Callback<Class<?>, Object> callback) {
         try {
-            Localization localization = new Localization();
+            Localization localization = Localization.getInstance();
 
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(resources.getPath())));
             loader.setControllerFactory(callback);

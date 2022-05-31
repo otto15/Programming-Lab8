@@ -18,7 +18,6 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -26,18 +25,31 @@ import java.util.concurrent.TimeUnit;
 
 public class TableModel {
 
-    private final User user;
+    private User user;
     private final NetworkListener networkListener;
-    private ListProperty<Person> persons;
+    private final ListProperty<Person> persons;
 
     {
         networkListener = ClientNetworkListener.getInstance();
         persons = new SimpleListProperty<>(FXCollections.observableArrayList());
     }
 
-    public TableModel(User user) {
-        this.user = user;
+    private TableModel() {
         launchUpdatingPersons();
+    }
+
+    private static class TableModelHolder {
+        public static final TableModel TABLE_MODEL_HOLDER = new TableModel();
+    }
+
+    public static TableModel getInstance(User user) {
+        TableModel tableModel = TableModelHolder.TABLE_MODEL_HOLDER;
+        tableModel.setUser(user);
+        return tableModel;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void getNewCollection() throws AlertException {
@@ -83,7 +95,6 @@ public class TableModel {
                 }
             }
         }
-//        persons.setValue(persons.get());
         persons.removeIf(person -> !newPersonsList.contains(person));
     }
 

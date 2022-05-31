@@ -4,8 +4,8 @@
 
 <ContextMenu xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.controllers.TableMenuController">
     <items>
-        <MenuItem text="Update" onAction="#updateButtonPressed"/>
-        <MenuItem text="Remove" onAction="#deleteButtonPressed"/>
+        <MenuItem text="%table_menu_update" onAction="#updateButtonPressed"/>
+        <MenuItem text="%table_menu_remove" onAction="#deleteButtonPressed"/>
     </items>
 </ContextMenu>
 

@@ -19,7 +19,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Localization localization = new Localization();
+            Localization localization = Localization.getInstance();
 
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.LOGIN_WINDOW_PATH.getPath())));
             loader.setResources(localization.getResourceBundle());

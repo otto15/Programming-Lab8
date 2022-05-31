@@ -20,4 +20,8 @@ public enum Locales {
     public Locale getLocale() {
         return locale;
     }
+
+    public String getRepresentation() {
+        return representation;
+    }
 }

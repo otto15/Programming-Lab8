@@ -17,10 +17,13 @@
         <AnchorPane prefHeight="101.0" prefWidth="827.0">
             <AnchorPane fx:id="topBar" prefHeight="70.0" prefWidth="853.0" styleClass="top-bar" BorderPane.alignment="CENTER">
                 <children>
-                    <Button layoutX="741.0" layoutY="17.0" mnemonicParsing="false" onAction="#logoutButtonPressed" prefHeight="36.0" prefWidth="98.0" styleClass="log-out-button" text="logout" textFill="#6187e2">
+                    <Button layoutX="741.0" layoutY="17.0" mnemonicParsing="false" onAction="#logoutButtonPressed" prefHeight="36.0" prefWidth="98.0" styleClass="log-out-button" text="%main_logout" textFill="#6187e2">
                         <font>
                             <Font name="League Spartan Medium" size="18.0" />
                         </font>
+                        <tooltip>
+                            <Tooltip text="%main_logout" />
+                        </tooltip>
                     </Button>
                     <Label fx:id="usernameLabel" alignment="CENTER" layoutX="638.0" layoutY="16.0" prefHeight="38.0" prefWidth="102.0" text="Username" textAlignment="CENTER" textFill="WHITE">
                         <font>
@@ -60,21 +63,27 @@
              <!--            </children>-->
              <HBox layoutX="593.0" layoutY="70.0" prefHeight="42.0" prefWidth="246.0">
                  <children>
-                     <Button fx:id="tableButton" mnemonicParsing="false" onAction="#tableButtonPressed" prefHeight="32.0" prefWidth="98.0" text="Table">
+                     <Button fx:id="tableButton" mnemonicParsing="false" onAction="#tableButtonPressed" prefHeight="32.0" prefWidth="98.0" text="%main_table">
                          <styleClass>
                              <String fx:value="selection-button" />
                              <String fx:value="left-selection-button" />
                          </styleClass>
+                         <tooltip>
+                             <Tooltip text="%main_table" />
+                         </tooltip>
                      </Button>
-                     <Button fx:id="visualizeButton" mnemonicParsing="false" onAction="#visualizeButtonPressed" prefHeight="32.0" prefWidth="114.0" text="Visualize" HBox.hgrow="ALWAYS">
+                     <Button fx:id="visualizeButton" mnemonicParsing="false" onAction="#visualizeButtonPressed" prefHeight="32.0" prefWidth="114.0" text="%main_visualize" HBox.hgrow="ALWAYS">
                          <styleClass>
                              <String fx:value="selection-button" />
                              <String fx:value="right-selection-button" />
                          </styleClass>
+                         <tooltip>
+                             <Tooltip text="%main_visualize" />
+                         </tooltip>
                      </Button>
                  </children>
              </HBox>
-         <ComboBox fx:id="languageComboBox" layoutX="32.0" layoutY="78.0" prefHeight="26.0" prefWidth="138.0" promptText="Language" />
+         <ComboBox fx:id="languageComboBox" layoutX="32.0" layoutY="78.0" onAction="#comboAction" prefHeight="26.0" prefWidth="138.0" promptText="%main_language" />
         </AnchorPane>
     </top>
     <left>
@@ -82,40 +91,52 @@
             <children>
                 <VBox alignment="TOP_CENTER" prefHeight="442.0" prefWidth="200.0" spacing="20.0">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#addButtonPressed" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="Add" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#addButtonPressed" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="%main_add" textFill="WHITE">
                             <font>
                                 <Font name="League Spartan Medium" size="18.0" />
                             </font>
+                            <tooltip>
+                                <Tooltip text="%main_add" />
+                            </tooltip>
                         </Button>
 <!--                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="Update" textFill="WHITE">-->
 <!--                            <font>-->
 <!--                                <Font name="League Spartan Medium" size="18.0" />-->
 <!--                            </font>-->
 <!--                        </Button>-->
-                        <Button mnemonicParsing="false" onAction="#historyButtonPressed" prefHeight="107.0" prefWidth="141.0" styleClass="command-button" text="History" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#historyButtonPressed" prefHeight="107.0" prefWidth="141.0" styleClass="command-button" text="%main_history" textFill="WHITE">
                             <font>
                                 <Font name="League Spartan Medium" size="18.0" />
                             </font>
+                            <tooltip>
+                                <Tooltip text="%main_history" />
+                            </tooltip>
                         </Button>
-                  <Button mnemonicParsing="false" onAction="#addIfMinButtonPressed" prefHeight="107.0" prefWidth="141.0" styleClass="command-button" text="Add If Min" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#addIfMinButtonPressed" prefHeight="107.0" prefWidth="141.0" styleClass="command-button" text="%main_add_if_min" textFill="WHITE">
                      <font>
                         <Font name="League Spartan Medium" size="18.0" />
                      </font>
+                      <tooltip>
+                          <Tooltip text="%main_add_if_min" />
+                      </tooltip>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#removeGreaterButtonPressed" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="Remove Great." textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#removeGreaterButtonPressed" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="%main_remove_greater" textFill="WHITE">
                      <font>
                         <Font name="League Spartan Medium" size="18.0" />
                      </font>
                      <tooltip>
-                        <Tooltip text="Remove Greater" />
+                        <Tooltip text="%main_remove_greater" />
                      </tooltip>
                   </Button>
-                        <Button mnemonicParsing="false" onAction="#clearButtonPressed" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="Clear" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#clearButtonPressed" prefHeight="38.0" prefWidth="141.0" styleClass="command-button" text="%main_clear" textFill="WHITE">
                             <font>
                                 <Font name="League Spartan Medium" size="18.0" />
                             </font>
+                            <tooltip>
+                                <Tooltip text="%main_clear" />
+                            </tooltip>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#exitButtonPressed" prefHeight="26.0" prefWidth="130.0" text="Exit">
+                        <Button mnemonicParsing="false" onAction="#exitButtonPressed" prefHeight="26.0" prefWidth="130.0" text="%main_exit">
                             <VBox.margin>
                                 <Insets top="60.0" />
                             </VBox.margin>
@@ -123,6 +144,9 @@
                                 <String fx:value="command-button" />
                                 <String fx:value="exit-button" />
                             </styleClass>
+                            <tooltip>
+                                <Tooltip text="%main_exit" />
+                            </tooltip>
                         </Button>
                     </children>
                <padding>
