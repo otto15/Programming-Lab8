@@ -34,17 +34,27 @@ HBox {
     -fx-alignment: center-right;
 }
 
+ComboBox {
+    -fx-text-fill: #6187e2;
+    -fx-border-color: linear-gradient(from 0% 0% to 100% 60%, #493FC0 0%, rgba(78, 180, 255, 0.74) 100%);
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-background-color: #FFFFFF;
+    -fx-font-family: "League Spartan Medium";
+    -fx-font-size: 14px;
+}
+
 .selection-button {
     -fx-font-family: "League Spartan Medium";
     -fx-text-fill: #6187e2;
-    -fx-pref-width: 80px;
+    -fx-pref-width: 100px;
     -fx-font-size: 16px;
     -fx-background-color: #FFFFFF;
     -fx-border-color: linear-gradient(from 0% 0% to 100% 60%, #493FC0 0%, rgba(78, 180, 255, 0.74) 100%);
     -fx-collapsible: true;
 }
 
-.selection-button:focused {
+.selection-button:hover {
     -fx-background-color: linear-gradient(from 0% 0% to 100% 60%, #493FC0 0%, rgba(78, 180, 255, 0.74) 100%);
     -fx-text-fill: #FFFFFF;
 }
