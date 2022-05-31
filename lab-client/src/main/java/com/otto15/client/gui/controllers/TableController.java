@@ -5,7 +5,6 @@ import com.otto15.client.gui.models.TableModel;
 import com.otto15.common.entities.Coordinates;
 import com.otto15.common.entities.Location;
 import com.otto15.common.entities.Person;
-import com.otto15.common.entities.User;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -27,9 +26,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class TableController extends AbstractController {
-
-    private final User user;
-
     @FXML
     private TableView<Person> table;
     @FXML
@@ -69,16 +65,14 @@ public class TableController extends AbstractController {
     @FXML
     private TextField locationFilter;
 
-    TableModel tableModel;
+    private final TableModel tableModel;
 
-    public TableController(User user) {
-        this.user = user;
+    public TableController(TableModel tableModel) {
+        this.tableModel = tableModel;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        tableModel = new TableModel(user);
-
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -88,8 +82,6 @@ public class TableController extends AbstractController {
         hairColorColumn.setCellValueFactory(new PropertyValueFactory<>("hairColor"));
         nationalityColumn.setCellValueFactory(new PropertyValueFactory<>("nationality"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-
-        tableModel.launchUpdatingPersons();
 
         applyFilters();
     }
@@ -127,7 +119,7 @@ public class TableController extends AbstractController {
             Person person = table.getSelectionModel().getSelectedItem();
             if (person != null && ((MouseEvent) event).getButton() == MouseButton.SECONDARY) {
                 FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.TABLE_MENU_PATH.getPath())));
-                loader.setControllerFactory(aClass -> new TableMenuController(person, user));
+                loader.setControllerFactory(aClass -> new TableMenuController(person, tableModel.getUser()));
 
                 ContextMenu contextMenu = loader.load();
                 table.contextMenuProperty().bind(new SimpleObjectProperty<>(contextMenu));

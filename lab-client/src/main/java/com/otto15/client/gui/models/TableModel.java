@@ -30,16 +30,14 @@ public class TableModel {
     private final NetworkListener networkListener;
     private ListProperty<Person> persons;
 
-
     {
-
         networkListener = ClientNetworkListener.getInstance();
         persons = new SimpleListProperty<>(FXCollections.observableArrayList());
-
     }
 
     public TableModel(User user) {
         this.user = user;
+        launchUpdatingPersons();
     }
 
     public void getNewCollection() throws AlertException {
@@ -64,10 +62,6 @@ public class TableModel {
             }
             try {
                 getNewCollection();
-//                System.out.println(tablePersons.equals(serverPersons));
-//                System.out.println();
-                //TODO this ******* ****
-                //updateIfChanged();
             } catch (AlertException e) {
                 Platform.runLater(e::showAlert);
             }
@@ -98,5 +92,9 @@ public class TableModel {
 
     public ListProperty<Person> personsProperty() {
         return persons;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

@@ -5,6 +5,7 @@ import com.otto15.client.exceptions.AlertException;
 import com.otto15.client.gui.Localization;
 import com.otto15.client.gui.Resources;
 import com.otto15.client.gui.models.CommandModel;
+import com.otto15.client.gui.models.TableModel;
 import com.otto15.common.entities.User;
 import com.otto15.common.state.PerformanceState;
 import javafx.application.Platform;
@@ -23,6 +24,7 @@ import java.util.ResourceBundle;
 public class MainController extends AbstractController {
 
     private final User user;
+    private final TableModel tableModel;
 
     @FXML
     private Label usernameLabel;
@@ -33,6 +35,7 @@ public class MainController extends AbstractController {
 
     public MainController(User user) {
         this.user = user;
+        tableModel = new TableModel(user);
     }
 
     @Override
@@ -64,7 +67,7 @@ public class MainController extends AbstractController {
         Localization localization = new Localization();
 
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.TABLE_PATH.getPath())));
-        loader.setControllerFactory(aClass -> new TableController(user));
+        loader.setControllerFactory(aClass -> new TableController(tableModel));
         loader.setResources(localization.getResourceBundle());
 
         borderPane.setCenter(loader.load());
@@ -75,6 +78,7 @@ public class MainController extends AbstractController {
         Localization localization = new Localization();
 
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(Resources.VISUALIZE_PATH.getPath())));
+        loader.setControllerFactory(aClass -> new VisualizeController(tableModel));
         loader.setResources(localization.getResourceBundle());
 
         borderPane.setCenter(loader.load());
