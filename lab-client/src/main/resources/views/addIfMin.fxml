@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="365.0" text="Add" textAlignment="CENTER" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.controllers.PersonProcessController">
+<TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="365.0" text="Add If Min" textAlignment="CENTER" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.controllers.PersonProcessController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="385.0" prefWidth="364.0">
          <children>
@@ -60,7 +60,7 @@
             <TextField fx:id="zLocationField" layoutX="274.0" layoutY="295.0" prefHeight="30.0" prefWidth="73.0" />
             <HBox alignment="CENTER" layoutX="-31.0" layoutY="339.0" prefHeight="54.0" prefWidth="425.0" spacing="5.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#addButtonPressed" prefHeight="30.0" prefWidth="110.0" text="Add">
+                  <Button mnemonicParsing="false" onAction="#addIfMinButtonPressed" prefHeight="30.0" prefWidth="110.0" text="Add if min">
                      <font>
                         <Font size="14.0" />
                      </font>

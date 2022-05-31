@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.locks.Lock;
@@ -85,11 +86,11 @@ public final class CommandManager {
         clientCommands.put("add", new AddCommand(this));
         clientCommands.put("add_if_min", new AddIfMinCommand(this));
         clientCommands.put("clear", new ClearCommand(this));
-        clientCommands.put("history", new HistoryCommand(this));
+        clientCommands.put("history", new HistoryCommand());
         clientCommands.put("info", new InfoCommand(this));
         clientCommands.put("remove_any_by_height", new RemoveAnyByHeightCommand(this));
         clientCommands.put("remove_by_id", new RemoveByIdCommand(this));
-        clientCommands.put("remove_greater", new RemoveGreaterCommand(this));
+        clientCommands.put("remove_greater", new RemoveGreaterCommand());
         clientCommands.put("sum_of_height", new SumOfHeightCommand(this));
         clientCommands.put("update", new UpdateCommand(this));
         clientCommands.put("group_counting_by_height", new GroupCountingByHeightCommand(this));
@@ -131,7 +132,9 @@ public final class CommandManager {
         Lock writeLock = lock.writeLock();
         try {
             writeLock.lock();
-            commandHistory.add(commandName);
+            if (!Objects.equals(commandName, "show")) {
+                commandHistory.add(commandName);
+            }
             if (commandHistory.size() > HISTORY_LENGTH) {
                 commandHistory.poll();
             }

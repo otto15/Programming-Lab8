@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 
 public class RemoveGreaterCommand extends AbstractCommand {
 
-    public RemoveGreaterCommand(CommandManager commandManager) {
-        super(commandManager, "remove_greater", "remove all elements greater than given", 0);
+    public RemoveGreaterCommand() {
+        super( "remove_greater", "remove all elements greater than given", 0);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class RemoveGreaterCommand extends AbstractCommand {
             }
             getCommandManager().getCollectionManager().remove(personToDelete);
         }
-        return new Response((collectionLen - getCommandManager().getCollectionManager().getPersons().size()) + " object(s) was deleted.",
-                true);
+        return new Response((collectionLen - getCommandManager().getCollectionManager().getPersons().size())
+                + " object(s) was deleted.", true);
     }
 }

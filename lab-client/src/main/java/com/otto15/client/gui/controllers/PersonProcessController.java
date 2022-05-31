@@ -6,12 +6,14 @@ import com.otto15.common.entities.User;
 import com.otto15.common.entities.enums.Color;
 import com.otto15.common.entities.enums.Country;
 import com.otto15.common.exceptions.ValidationException;
+import com.otto15.common.network.Response;
 import com.otto15.common.state.PerformanceState;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -19,7 +21,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddCommandController extends AbstractController {
+public class PersonProcessController extends AbstractController {
     private final User user;
     private CommandModel commandModel;
 
@@ -44,7 +46,7 @@ public class AddCommandController extends AbstractController {
     @FXML
     private TextField zLocationField;
 
-    public AddCommandController(User user) {
+    public PersonProcessController(User user) {
         this.user = user;
     }
 
@@ -87,6 +89,27 @@ public class AddCommandController extends AbstractController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try {
             commandModel.addIfMin(user);
+            stage.close();
+        } catch (ValidationException e) {
+            e.getValidationErrorsList().forEach(System.out::println);
+            //TODO
+        } catch (AlertException e) {
+            e.showAlert();
+            PerformanceState.getInstance().switchPerformanceStatus();
+            Platform.exit();
+        }
+    }
+
+    public void removeGreaterButtonPressed(Event event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try {
+            Response response = commandModel.removeGreater(user);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText(response.getMessage());
+            alert.showAndWait();
+
             stage.close();
         } catch (ValidationException e) {
             e.getValidationErrorsList().forEach(System.out::println);

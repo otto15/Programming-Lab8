@@ -10,6 +10,7 @@ import com.otto15.common.network.Response;
 import com.otto15.common.utils.DataNormalizer;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class UpdateCommand extends AbstractCommand {
 
@@ -52,6 +53,10 @@ public class UpdateCommand extends AbstractCommand {
         Person updatedPerson = (Person) args[0];
         User user = (User) args[1];
         updatedPerson.setAuthor(user.getLogin());
+        Person foundPerson = getCommandManager().getCollectionManager().findById((Long) args[0]);
+        if (!Objects.equals(foundPerson.getAuthor(), user.getLogin())) {
+            return new Response("You do not have rights to the person with such id.", false);
+        }
         if (getCommandManager().getDBWorker().updatePerson(updatedPerson) <= 0) {
             return new Response("Could not update person because of DB problems.", false);
         }

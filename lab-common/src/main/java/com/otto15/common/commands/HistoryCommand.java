@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 
 public class HistoryCommand extends AbstractCommand {
 
-    public HistoryCommand(CommandManager commandManager) {
-        super(commandManager, "history", "outputs last 10 commands", 0);
+    public HistoryCommand() {
+        super("history", "outputs last 10 commands", 0);
     }
 
     @Override
