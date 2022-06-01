@@ -14,7 +14,7 @@ import java.io.Reader;
 
 public final class ClientNetworkListener implements NetworkListener {
 
-    private static final int TIMEOUT = 10000;
+    private static final int TIMEOUT = 20000;
     private final ConnectionHandler connectionHandler;
     private final Reader reader = new InputStreamReader(System.in);
 

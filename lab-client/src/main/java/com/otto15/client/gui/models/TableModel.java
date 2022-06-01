@@ -19,6 +19,8 @@ import javafx.collections.ObservableList;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -58,7 +60,7 @@ public class TableModel {
             response = networkListener.listen(new Request(new ShowCommand(), new Object[]{user}));
             Platform.runLater(() -> updateCollection(response.getPersons()));
         } catch (IOException e) {
-            throw new AlertException("Server isn't available, try later");
+            throw new AlertException("Server isn't available, try later", e);
         }
     }
 
@@ -75,7 +77,9 @@ public class TableModel {
             try {
                 getNewCollection();
             } catch (AlertException e) {
-                Platform.runLater(e::showAlert);
+                executor.shutdown();
+                Platform.setImplicitExit(false);
+                Platform.runLater(e::fatalShowAlert);
             }
             if (executor.isShutdown()) {
                 ConnectionHandler.getInstance().close();

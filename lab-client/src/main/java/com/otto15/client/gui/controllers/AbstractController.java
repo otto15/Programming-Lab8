@@ -69,13 +69,15 @@ public abstract class AbstractController implements Initializable {
         }
     }
 
-    public void showErrors(List<TextField> errorFields, List<Label> errorLabels, List<String> errorMessages) {
+    public void showErrors(List<Node> errorFields, List<Label> errorLabels, List<String> errorMessages) {
         for (int i = 0; i < errorMessages.size(); i++) {
             String errorMessage = errorMessages.get(i);
             if (errorMessage == null) {
                 continue;
             }
-            errorFields.get(i).setText("");
+            if (errorFields.get(i).getClass() == TextField.class) {
+                ((TextField) errorFields.get(i)).setText("");
+            }
             errorLabels.get(i).setText(errorMessage);
             errorLabels.get(i).setVisible(true);
         }

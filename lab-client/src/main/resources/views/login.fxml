@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -8,8 +10,8 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane minHeight="220.0" minWidth="300.0" prefHeight="220.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.controllers.LoginController">
-    <Button disable="true" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="%login_text" />
-    <Button layoutX="150.0" mnemonicParsing="false" onAction="#switchToRegisterScene" prefHeight="35.0" prefWidth="150.0" text="%register_text" />
+    <Button disable="true" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" styleClass="sign-button" text="%login_text" />
+    <Button layoutX="150.0" mnemonicParsing="false" onAction="#switchToRegisterScene" prefHeight="35.0" prefWidth="150.0" styleClass="sign-button" text="%register_text" />
     <Label layoutX="7.0" layoutY="77.0" prefHeight="20.0" prefWidth="68.0" text="%username">
         <font>
             <Font size="14.0" />
@@ -20,12 +22,20 @@
             <Font size="14.0" />
         </font>
     </Label>
-    <TextField fx:id="usernameField" layoutX="75.0" layoutY="74.0" prefHeight="26.0" prefWidth="206.0" />
-    <PasswordField fx:id="passwordField" layoutX="75.0" layoutY="121.0" prefHeight="26.0" prefWidth="206.0" />
+    <TextField fx:id="usernameField" layoutX="75.0" layoutY="74.0" prefHeight="26.0" prefWidth="206.0" styleClass="data-field" />
+    <PasswordField fx:id="passwordField" layoutX="75.0" layoutY="121.0" prefHeight="26.0" prefWidth="206.0" styleClass="data-field" />
 
-    <Button layoutX="90.0" layoutY="169.0" mnemonicParsing="false" onAction="#logInButtonPressed" prefHeight="26.0" prefWidth="119.0" text="%sign_in_button_text" />
+    <Button fx:id="loginButton" layoutX="90.0" layoutY="169.0" mnemonicParsing="false" onAction="#logInButtonPressed" prefHeight="26.0" prefWidth="119.0" text="%sign_in_button_text">
+      <styleClass>
+         <String fx:value="sign-in-button" />
+         <String fx:value="sign-button" />
+      </styleClass></Button>
 
     <Label fx:id="usernameErrorLabel" layoutX="74.0" layoutY="47.0" prefHeight="26.0" prefWidth="222.0" text="%sign_in_error_message" textFill="#ef0000" visible="false" />
    <Label fx:id="passwordErrorLabel" layoutX="76.0" layoutY="102.0" prefHeight="18.0" prefWidth="206.0" text="Label" textFill="RED" visible="false" />
+   <stylesheets>
+      <URL value="@../styles/login.css" />
+      <URL value="@../styles/main.css" />
+   </stylesheets>
 
 </AnchorPane>

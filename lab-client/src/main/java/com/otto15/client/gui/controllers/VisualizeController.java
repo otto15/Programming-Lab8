@@ -15,7 +15,9 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class VisualizeController extends AbstractController {
@@ -27,6 +29,7 @@ public class VisualizeController extends AbstractController {
 
     private final TableModel tableModel;
     private final List<Canvas> peoples;
+    private static final Map<String, Color> colors = new HashMap<>();
 
     public VisualizeController(TableModel tableModel) {
         this.tableModel = tableModel;
@@ -56,36 +59,40 @@ public class VisualizeController extends AbstractController {
         personCanvas.setLayoutY(calculateY(coordinates.getY() / 5));
 
         GraphicsContext graphicsContext = personCanvas.getGraphicsContext2D();
-        graphicsContext.setFill(Color.BLACK);
-        graphicsContext.setStroke(Color.BLACK);
+        if (!colors.containsKey(person.getAuthor())) {
+//            System.out.println(person.getAuthor());
+//            System.out.println(colors.keySet());
+            colors.put(person.getAuthor(), Color.color(Math.random(), Math.random(), Math.random()));
+        }
+        graphicsContext.setFill(colors.get(person.getAuthor()));
+        graphicsContext.setStroke(colors.get(person.getAuthor()));
         graphicsContext.setLineWidth(3);
 
-        graphicsContext.strokeLine(7, 11, 7, 21);
+        graphicsContext.strokeLine(7, 15, 7, 30);
         //legs
-        graphicsContext.strokeLine( 0, 30, 7, 21);
-        graphicsContext.strokeLine(14,30, 7, 21);
+        graphicsContext.strokeLine( 0, 35, 7, 30);
+        graphicsContext.strokeLine(14,35, 7, 30);
 
         //hands
-        graphicsContext.strokeLine(0, 5, 7,11);
-        graphicsContext.strokeLine( 14, 5, 7,11);
+        graphicsContext.strokeLine(0, 13, 7,20);
+        graphicsContext.strokeLine( 14, 13, 7,20);
 
         //head
-        graphicsContext.strokeOval(- 5, - 24, 10, 10);
-//        graphicsContext.strokeLine(calculateX(coordinates.getX()), calculateY(coordinates.getY() - 11), calculateX(coordinates.getX()), calculateY(coordinates.getY() + 10));
-//        //legs
-//        graphicsContext.strokeLine(calculateX(coordinates.getX() - 7), calculateY(coordinates.getY() + 15), calculateX(coordinates.getX()), calculateY(coordinates.getY() + 10));
-//        graphicsContext.strokeLine(calculateX(coordinates.getX() + 7), calculateY(coordinates.getY() + 15), calculateX(coordinates.getX()), calculateY(coordinates.getY() + 10));
-//
-//        //hands
-//        graphicsContext.strokeLine(calculateX(coordinates.getX() - 7), calculateY(coordinates.getY() - 10), calculateX(coordinates.getX()), calculateY(coordinates.getY() - 6));
-//        graphicsContext.strokeLine(calculateX(coordinates.getX() + 7), calculateY(coordinates.getY() - 10), calculateX(coordinates.getX()), calculateY(coordinates.getY() - 6));
-//
-//        //head
-//        graphicsContext.strokeOval(calculateX(coordinates.getX() - 5), calculateY(coordinates.getY() - 24), 10, 10);
+        graphicsContext.strokeOval(2, 2, 10, 10);
 
-
-
-
+        if (person.getEyeColor() != null) {
+            switch (person.getEyeColor()) {
+                case RED -> graphicsContext.setFill(Color.RED);
+                case BLUE -> graphicsContext.setFill(Color.BLUE);
+                case BLACK -> graphicsContext.setFill(Color.BLACK);
+                case BROWN -> graphicsContext.setFill(Color.BROWN);
+                case GREEN -> graphicsContext.setFill(Color.GREEN);
+                case WHITE -> graphicsContext.setFill(Color.WHITE);
+                case ORANGE -> graphicsContext.setFill(Color.ORANGE);
+                case YELLOW -> graphicsContext.setFill(Color.YELLOW);
+            }
+            graphicsContext.fillOval(3, 3, 7, 7);
+        }
         personCanvas.setOnMouseEntered(event -> {
             personCanvas.setScaleX(1.07);
             personCanvas.setScaleY(1.07);

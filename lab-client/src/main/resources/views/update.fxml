@@ -18,14 +18,15 @@
                 <TextField fx:id="nameField" layoutX="108.0" layoutY="40.0" prefHeight="25.0" prefWidth="240.0"/>
                 <Label alignment="CENTER" layoutX="15.0" layoutY="40.0" prefHeight="25.0" prefWidth="85.0" text="%info_name"
                        textAlignment="CENTER">
+
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
                 <Label alignment="CENTER" layoutX="15.0" layoutY="85.0" prefHeight="25.0" prefWidth="85.0"
                        text="%info_coordinates" textAlignment="CENTER">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
                 <TextField layoutX="108.0" layoutY="85.0" prefHeight="30.0" prefWidth="90.0" fx:id="xCoordinatesField"/>
@@ -33,38 +34,44 @@
                 <Label alignment="CENTER" layoutX="15.0" layoutY="130.0" prefHeight="25.0" prefWidth="85.0"
                        text="%info_height" textAlignment="CENTER">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
+
                 <TextField fx:id="heightField" layoutX="108.0" layoutY="130.0" prefHeight="25.0" prefWidth="240.0"/>
                 <Label alignment="CENTER" layoutX="15.0" layoutY="175.0" prefHeight="25.0" prefWidth="85.0"
                        text="%info_eye_color" textAlignment="CENTER">
+
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
+
                 <ComboBox fx:id="eyeColorComboBox" layoutX="108.0" layoutY="175.0" prefHeight="30.0" prefWidth="240.0"
                           promptText="%add_eye_color_invitation"/>
                 <Label alignment="CENTER" layoutX="15.0" layoutY="220.0" prefHeight="25.0" prefWidth="85.0"
                        text="Hair color:" textAlignment="CENTER">
+
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
                 <ComboBox fx:id="hairColorComboBox" layoutX="108.0" layoutY="220.0" prefHeight="30.0" prefWidth="240.0"
                           promptText="%add_hair_color_invitation"/>
                 <Label alignment="CENTER" layoutX="15.0" layoutY="265.0" prefHeight="25.0" prefWidth="85.0"
                        text="%info_nationality" textAlignment="CENTER">
+
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
                 <ComboBox fx:id="nationalityComboBox" layoutX="108.0" layoutY="265.0" prefHeight="30.0"
                           prefWidth="240.0" promptText=" Choose country"/>
                 <Label alignment="CENTER" layoutX="15.0" layoutY="310.0" prefHeight="25.0" prefWidth="85.0"
                        text="%info_location" textAlignment="CENTER">
+
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
                 <TextField layoutX="108.0" layoutY="310.0" prefHeight="30.0" prefWidth="73.0" fx:id="xLocationField"/>
@@ -72,26 +79,27 @@
                 <TextField fx:id="zLocationField" layoutX="274.0" layoutY="310.0" prefHeight="30.0" prefWidth="73.0"/>
                 <Button layoutX="108.0" layoutY="365.0" mnemonicParsing="false" onAction="#updateButtonPressed"
                         prefHeight="30.0" prefWidth="156.0" text="%info_update">
+
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Button>
                 <Label alignment="CENTER" layoutX="15.0" layoutY="9.0" prefHeight="25.0" prefWidth="85.0" text="%info_id"
                        textAlignment="CENTER">
+
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
-                <Label fx:id="idLabel" alignment="CENTER" layoutX="108.0" layoutY="9.0" prefHeight="26.0"
-                       prefWidth="240.0" textAlignment="CENTER">
+                <Label fx:id="idLabel" alignment="CENTER" layoutX="108.0" layoutY="9.0" prefHeight="26.0" prefWidth="240.0" textAlignment="CENTER">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
             </children>
         </AnchorPane>
     </content>
     <font>
-        <Font size="19.0"/>
+        <Font size="19.0" />
     </font>
 </TitledPane>

@@ -123,14 +123,8 @@ public class MainController extends AbstractController {
     }
 
     public void historyButtonPressed(Event event) {
-        try {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setContentText(commandModel.history(user).getMessage());
-            alert.showAndWait();
-        } catch (AlertException e) {
-            e.showAlert();
-        }
+        commandModel.history(user);
+
     }
 
     public void logoutButtonPressed(Event event) {

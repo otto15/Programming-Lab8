@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -9,8 +11,8 @@
 
 <AnchorPane prefHeight="278.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.controllers.RegisterController">
     <children>
-        <Button mnemonicParsing="false" onAction="#switchToLoginScene" prefHeight="35.0" prefWidth="150.0" text="%login_text" />
-        <Button disable="true" layoutX="150.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="%register_text" />
+        <Button mnemonicParsing="false" onAction="#switchToLoginScene" prefHeight="35.0" prefWidth="150.0" styleClass="sign-button" text="%login_text" />
+        <Button disable="true" layoutX="150.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" styleClass="sign-button" text="%register_text" />
         <Label layoutX="5.0" layoutY="77.0" prefHeight="20.0" prefWidth="70.0" text="%username">
             <font>
                 <Font size="14.0" />
@@ -25,7 +27,11 @@
         <TextField fx:id="usernameField" layoutX="75.0" layoutY="74.0" prefHeight="26.0" prefWidth="206.0" />
         <PasswordField fx:id="passwordField" layoutX="75.0" layoutY="121.0" prefHeight="26.0" prefWidth="206.0" />
         <PasswordField fx:id="repeatPasswordField" layoutX="75.0" layoutY="168.0" prefHeight="26.0" prefWidth="206.0" />
-        <Button layoutX="90.0" layoutY="223.0" mnemonicParsing="false" onAction="#registerButtonPressed" prefHeight="26.0" prefWidth="119.0" text="%sign_up_button_text" />
+        <Button fx:id="registerButton" layoutX="90.0" layoutY="223.0" mnemonicParsing="false" onAction="#registerButtonPressed" prefHeight="26.0" prefWidth="119.0" text="%sign_up_button_text">
+         <styleClass>
+            <String fx:value="sign-in-button" />
+            <String fx:value="sign-button" />
+         </styleClass></Button>
         <Label layoutX="3.0" layoutY="160.0" prefHeight="46.0" prefWidth="70.0" text="%repeat_password" textAlignment="CENTER" wrapText="true">
 
             <font>
@@ -38,4 +44,8 @@
       <Label fx:id="repeatPasswordLabel" layoutX="76.0" layoutY="150.0" prefHeight="18.0" prefWidth="206.0" text="Label" textFill="RED" visible="false" />
 
     </children>
+   <stylesheets>
+      <URL value="@../styles/login.css" />
+      <URL value="@../styles/main.css" />
+   </stylesheets>
 </AnchorPane>

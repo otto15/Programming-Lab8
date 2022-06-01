@@ -18,10 +18,12 @@ import com.otto15.common.exceptions.ValidationException;
 import com.otto15.common.network.NetworkListener;
 import com.otto15.common.network.Request;
 import com.otto15.common.network.Response;
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
 
 import javax.swing.*;
@@ -96,78 +98,65 @@ public class CommandModel {
         return zLocation;
     }
 
+    private void sendRequestInNewThread(Request request) {
+        new Thread(() -> {
+            try {
+                Response response = networkListener.listen(request);
+                Platform.runLater(new AlertException(response.getMessage())::showAlert);
+            } catch (IOException e) {
+                new AlertException("Server doesn't work").fatalShowAlert();
+            }
+        }).start();
+    }
+
     public void add(User user) throws ValidationException, AlertException {
         Person person = PersonValidator.validatePersonFromString(name.get(), xCoordinates.get(), yCoordinates.get(), height.get(), eyeColor.get(), hairColor.get(), nationality.get(), xLocation.get(), yLocation.get(), zLocation.get());
 
-        Response response;
-        try {
-            response = networkListener.listen(new Request(new AddCommand(), new Object[]{person, user}));
-        } catch (IOException e) {
-            throw new AlertException("Server isn't available, try later", e);
-        }
-
+        sendRequestInNewThread(new Request(new AddCommand(), new Object[]{person, user}));
     }
 
     public void addIfMin(User user) throws ValidationException, AlertException {
         Person person = PersonValidator.validatePersonFromString(name.get(), xCoordinates.get(), yCoordinates.get(), height.get(), eyeColor.get(), hairColor.get(), nationality.get(), xLocation.get(), yLocation.get(), zLocation.get());
 
-        Response response;
-        try {
-            response = networkListener.listen(new Request(new AddIfMinCommand(), new Object[]{person, user}));
-        } catch (IOException e) {
-            throw new AlertException("Server isn't available, try later", e);
-        }
-
+        sendRequestInNewThread(new Request(new AddIfMinCommand(), new Object[]{person, user}));
     }
 
     public void update(long id, User user) throws ValidationException, AlertException {
         Person person = PersonValidator.validatePersonFromString(name.get(), xCoordinates.get(), yCoordinates.get(), height.get(), eyeColor.get(), hairColor.get(), nationality.get(), xLocation.get(), yLocation.get(), zLocation.get());
         person.setId(id);
-        Response response;
-        try {
-            response = networkListener.listen(new Request(new UpdateCommand(), new Object[]{person, user}));
-        } catch (IOException e) {
-            throw new AlertException("Server isn't available, try later", e);
-        }
 
+        sendRequestInNewThread(new Request(new UpdateCommand(), new Object[]{person, user}));
     }
 
     public void remove(long id, User user) throws AlertException {
-        Response response;
-        try {
-            response = networkListener.listen(new Request(new RemoveByIdCommand(), new Object[]{id, user}));
-        } catch (IOException e) {
-            throw new AlertException("Server isn't available, try later", e);
-        }
-
+        sendRequestInNewThread(new Request(new RemoveByIdCommand(), new Object[]{id, user}));
     }
 
     public void clear(User user) throws AlertException {
-        Response response;
-        try {
-            response = networkListener.listen(new Request(new ClearCommand(), new Object[]{user}));
-        } catch (IOException e) {
-            throw new AlertException("Server isn't available, try later", e);
-        }
-
+        sendRequestInNewThread(new Request(new ClearCommand(), new Object[] {user}));
     }
 
-    public Response removeGreater(User user) throws AlertException, ValidationException {
+    public void removeGreater(User user) throws ValidationException {
         Person person = PersonValidator.validatePersonFromString(name.get(), xCoordinates.get(), yCoordinates.get(), height.get(), eyeColor.get(), hairColor.get(), nationality.get(), xLocation.get(), yLocation.get(), zLocation.get());
 
-        Response response;
-        try {
-            return networkListener.listen(new Request(new RemoveGreaterCommand(), new Object[]{person, user}));
-        } catch (IOException e) {
-            throw new AlertException("Server isn't available, try later", e);
-        }
+        sendRequestInNewThread(new Request(new RemoveGreaterCommand(), new Object[]{person, user}));
     }
 
-    public Response history(User user) throws AlertException {
-        try {
-            return networkListener.listen(new Request(new HistoryCommand(), new Object[]{user}));
-        } catch (IOException e) {
-            throw new AlertException("Server isn't available, try later", e);
-        }
+    public void history(User user) {
+
+        new Thread(() -> {
+            try {
+                Response response = networkListener.listen(new Request(new HistoryCommand(), new Object[]{user}));
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText(null);
+                    alert.setContentText(response.getMessage());
+                    alert.showAndWait();
+                });
+            } catch (IOException e) {
+                Platform.runLater(new AlertException("Server isn't available, try later", e)::fatalShowAlert);
+            }
+        }).start();
+
     }
 }

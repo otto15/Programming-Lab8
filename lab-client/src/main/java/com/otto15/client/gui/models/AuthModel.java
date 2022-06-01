@@ -11,8 +11,12 @@ import com.otto15.common.entities.validators.UserValidator;
 import com.otto15.common.network.NetworkListener;
 import com.otto15.common.network.Request;
 import com.otto15.common.network.Response;
+import javafx.application.Platform;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -21,8 +25,6 @@ public class AuthModel {
     private final StringProperty username;
     private final StringProperty password;
     private final StringProperty repeatedPassword;
-
-
 
     private final NetworkListener networkListener;
 
@@ -45,40 +47,50 @@ public class AuthModel {
         return repeatedPassword;
     }
 
-    public Response login() throws AlertException, ValidationException {
+    public void login(ObjectProperty<Response> objectProperty) throws ValidationException {
         User user = UserValidator.validateUser(username.get(), password.get());
 
-        Response response;
-        try {
-            response = networkListener.listen(new Request(
-                    new SignInCommand(), new Object[]{user}
-            ));
-        } catch (IOException e) {
-            throw new AlertException("Server isn't available, try later", e);
-        }
+        new Thread(() -> {
+            try {
+                System.out.println("ready to listen");
+                Response response = networkListener.listen(new Request(
+                        new SignInCommand(), new Object[]{user}
 
-        if (!response.isStatus()) {
-            throw new ValidationException(Arrays.asList("Error when entering username/password", null));
-        }
-        return response;
+                ));
+                System.out.println("got");
+                Platform.runLater(() -> {
+                    objectProperty.setValue(response);
+                    System.out.println("set responce");
+                });
+            } catch (IOException e) {
+                System.out.println("server dead");
+                Platform.setImplicitExit(false);
+                Platform.runLater((new AlertException("Server isn't available, try later", e))::fatalShowAlert);
+            }
+        }).start();
     }
 
-    public Response register() throws AlertException, ValidationException {
+    public void register(ObjectProperty<Response> objectProperty) throws ValidationException {
         User user = UserValidator.validateUser(username.get(), password.get(), repeatedPassword.get());
 
-        Response response;
-        try {
-            response = networkListener.listen(new Request(
-                    new SignUpCommand(), new Object[]{user}
-            ));
-        } catch (IOException e) {
-            throw new AlertException("Server isn't available, try later", e);
-        }
+        new Thread(() -> {
+            try {
+                System.out.println("ready to listen");
+                Response response = networkListener.listen(new Request(
+                        new SignUpCommand(), new Object[]{user}
 
-        if (!response.isStatus()) {
-            throw new ValidationException(Arrays.asList("Such user already exist", null, null));
-        }
-        return response;
+                ));
+                System.out.println("got");
+                Platform.runLater(() -> {
+                    objectProperty.setValue(response);
+                    System.out.println("set responce");
+                });
+            } catch (IOException e) {
+                System.out.println("server dead");
+                Platform.setImplicitExit(false);
+                Platform.runLater((new AlertException("Server isn't available, try later", e))::fatalShowAlert);
+            }
+        }).start();
 
     }
 

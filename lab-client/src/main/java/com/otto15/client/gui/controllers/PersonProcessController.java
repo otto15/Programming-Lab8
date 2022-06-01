@@ -15,10 +15,13 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PersonProcessController extends AbstractController {
@@ -45,6 +48,22 @@ public class PersonProcessController extends AbstractController {
     private TextField yLocationField;
     @FXML
     private TextField zLocationField;
+    @FXML
+    private Label errorNameLabel;
+    @FXML
+    private Label errorXCoordinatesLabel;
+    @FXML
+    private Label errorYCoordinatesLabel;
+    @FXML
+    private Label errorHeightLabel;
+    @FXML
+    private Label errorCountryLst;
+    @FXML
+    private Label errorXLocationLabel;
+    @FXML
+    private Label errorYLocationLabel;
+    @FXML
+    private Label errorZLocationLabel;
 
     public PersonProcessController(User user) {
         this.user = user;
@@ -76,8 +95,10 @@ public class PersonProcessController extends AbstractController {
             commandModel.add(user);
             stage.close();
         } catch (ValidationException e) {
-            e.getValidationErrorsList().forEach(System.out::println);
-            //TODO
+            List<String> validationErrorsList = e.getValidationErrorsList();
+            List<Node> errorFields = Arrays.asList(nameField, xCoordinatesField, yCoordinatesField, heightField, nationalityComboBox, xLocationField, yLocationField, zLocationField);
+            List<Label> errorLabels = Arrays.asList(errorNameLabel, errorXCoordinatesLabel, errorYCoordinatesLabel, errorHeightLabel, errorCountryLst, errorXLocationLabel, errorYLocationLabel, errorZLocationLabel);
+            showErrors(errorFields, errorLabels, validationErrorsList);
         } catch (AlertException e) {
             e.showAlert();
             PerformanceState.getInstance().switchPerformanceStatus();
@@ -91,8 +112,10 @@ public class PersonProcessController extends AbstractController {
             commandModel.addIfMin(user);
             stage.close();
         } catch (ValidationException e) {
-            e.getValidationErrorsList().forEach(System.out::println);
-            //TODO
+            List<String> validationErrorsList = e.getValidationErrorsList();
+            List<Node> errorFields = Arrays.asList(nameField, xCoordinatesField, yCoordinatesField, heightField, nationalityComboBox, xLocationField, yLocationField, zLocationField);
+            List<Label> errorLabels = Arrays.asList(errorNameLabel, errorXCoordinatesLabel, errorYCoordinatesLabel, errorHeightLabel, errorCountryLst, errorXLocationLabel, errorYLocationLabel, errorZLocationLabel);
+            showErrors(errorFields, errorLabels, validationErrorsList);
         } catch (AlertException e) {
             e.showAlert();
             PerformanceState.getInstance().switchPerformanceStatus();
@@ -103,21 +126,10 @@ public class PersonProcessController extends AbstractController {
     public void removeGreaterButtonPressed(Event event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try {
-            Response response = commandModel.removeGreater(user);
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setContentText(response.getMessage());
-            alert.showAndWait();
-
-            stage.close();
+            commandModel.removeGreater(user);
         } catch (ValidationException e) {
             e.getValidationErrorsList().forEach(System.out::println);
             //TODO
-        } catch (AlertException e) {
-            e.showAlert();
-            PerformanceState.getInstance().switchPerformanceStatus();
-            Platform.exit();
         }
     }
 }

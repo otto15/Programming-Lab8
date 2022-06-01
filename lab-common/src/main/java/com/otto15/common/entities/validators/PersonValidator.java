@@ -146,10 +146,21 @@ public final class PersonValidator {
             validationErrorsList.add(e.getMessage());
         }
 
+        double x = 0, y;
         try {
-            Coordinates coordinates = getValidatedCoordinates(new String[] {xCoordinates, yCoordinates});
-            person.setCoordinates(coordinates);
+            x = CoordinatesValidator.getValidatedX(xCoordinates);
             validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        try {
+            y = CoordinatesValidator.getValidatedY(yCoordinates);
+            Coordinates coordinates = new Coordinates(x, y);
+            if (isCoordinatesValid(coordinates)) {
+                person.setCoordinates(coordinates);
+                validationErrorsList.add(null);
+            }
         } catch (IllegalArgumentException e) {
             validationErrorsList.add(e.getMessage());
         }
@@ -162,19 +173,8 @@ public final class PersonValidator {
             validationErrorsList.add(e.getMessage());
         }
 
-        try {
-            person.setEyeColor(eyeColor);
-            validationErrorsList.add(null);
-        } catch (IllegalArgumentException e) {
-            validationErrorsList.add(e.getMessage());
-        }
-
-        try {
-            person.setHairColor(hairColor);
-            validationErrorsList.add(null);
-        } catch (IllegalArgumentException e) {
-            validationErrorsList.add(e.getMessage());
-        }
+        person.setEyeColor(eyeColor);
+        person.setHairColor(hairColor);
 
         try {
             if (nationality == null) {
@@ -186,13 +186,40 @@ public final class PersonValidator {
             validationErrorsList.add(e.getMessage());
         }
 
+        double xl = 0;
+        long yl = 0;
+        float zl;
         try {
-            Location location = getValidatedLocation(new String[] {xLocation, yLocation, zLocation});
+            xl = LocationValidator.getValidatedX(xLocation);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        try {
+            yl = LocationValidator.getValidatedY(yLocation);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        try {
+            zl = LocationValidator.getValidatedZ(zLocation);
+            validationErrorsList.add(null);
+            Location location = new Location(xl, yl, zl);
             person.setLocation(location);
             validationErrorsList.add(null);
         } catch (IllegalArgumentException e) {
             validationErrorsList.add(e.getMessage());
         }
+
+//        try {
+//            Location location = getValidatedLocation(new String[] {xLocation, yLocation, zLocation});
+//            person.setLocation(location);
+//            validationErrorsList.add(null);
+//        } catch (IllegalArgumentException e) {
+//            validationErrorsList.add(e.getMessage());
+//        }
 
         if (validationErrorsList.stream().anyMatch(Objects::nonNull)) {
             throw new ValidationException(validationErrorsList);

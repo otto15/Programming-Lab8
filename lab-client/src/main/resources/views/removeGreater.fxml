@@ -81,6 +81,46 @@
                   </Button>
                </children>
             </HBox>
+            <Label fx:id="errorNameLabel" layoutX="108.0" layoutY="4.0" prefHeight="18.0" prefWidth="240.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorXCoordinatesLabel" layoutX="108.0" layoutY="53.0" prefHeight="14.0" prefWidth="90.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorYCoordinatesLabel" layoutX="258.0" layoutY="54.0" prefHeight="15.0" prefWidth="88.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorHeightLabel" layoutX="107.0" layoutY="97.0" prefHeight="17.0" prefWidth="242.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorCountryLst" layoutX="109.0" layoutY="234.0" prefHeight="18.0" prefWidth="238.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorXLocationLabel" layoutX="108.0" layoutY="276.0" prefHeight="22.0" prefWidth="74.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorYLocationLabel" layoutX="192.0" layoutY="276.0" prefHeight="18.0" prefWidth="70.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorZLocationLabel" layoutX="276.0" layoutY="276.0" prefHeight="19.0" prefWidth="71.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
   </content>
    <font>
