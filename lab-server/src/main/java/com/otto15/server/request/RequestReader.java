@@ -57,7 +57,7 @@ public class RequestReader implements Runnable {
                 channelState.put(channel, ChannelState.READY_TO_READ);
             }
         } catch (IOException e) {
-            channels.put(channel, null);
+            channelState.put(channel, ChannelState.READY_TO_DIE);
         }
     }
 

@@ -27,12 +27,17 @@ import com.otto15.common.network.Response;
 import com.otto15.common.state.PerformanceState;
 import com.otto15.common.utils.DataNormalizer;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Manager for commands, responsible for invoking.
@@ -45,19 +50,22 @@ public final class CommandManager {
     private final Map<String, AbstractCommand> serverCommands = new HashMap<>();
     private final Map<String, AbstractCommand> commandsSendingWithoutSending = new HashMap<>();
     private final Map<String, AbstractCommand> commandsWithoutAuth = new HashMap<>();
-    private final PerformanceState performanceState;
+    private final ReadWriteLock lock = new ReentrantReadWriteLock(true);
     private NetworkListener networkListener;
     private CollectionManager collectionManager;
     private DBWorker dbWorker;
+    private PerformanceState performanceState;
 
-    public CommandManager(CollectionManager collectionManager, DBWorker dbWorker, PerformanceState performanceState) {
-        this.performanceState = performanceState;
+    {
+        performanceState = PerformanceState.getInstance();
+    }
+
+    public CommandManager(CollectionManager collectionManager, DBWorker dbWorker) {
         this.collectionManager = collectionManager;
         this.dbWorker = dbWorker;
     }
 
-    public CommandManager(NetworkListener networkListener, PerformanceState performanceState) {
-        this.performanceState = performanceState;
+    public CommandManager(NetworkListener networkListener) {
         this.networkListener = networkListener;
     }
 
@@ -78,19 +86,22 @@ public final class CommandManager {
         clientCommands.put("add", new AddCommand(this));
         clientCommands.put("add_if_min", new AddIfMinCommand(this));
         clientCommands.put("clear", new ClearCommand(this));
-        clientCommands.put("history", new HistoryCommand(this));
+        clientCommands.put("history", new HistoryCommand());
         clientCommands.put("info", new InfoCommand(this));
         clientCommands.put("remove_any_by_height", new RemoveAnyByHeightCommand(this));
         clientCommands.put("remove_by_id", new RemoveByIdCommand(this));
-        clientCommands.put("remove_greater", new RemoveGreaterCommand(this));
+        clientCommands.put("remove_greater", new RemoveGreaterCommand());
         clientCommands.put("sum_of_height", new SumOfHeightCommand(this));
         clientCommands.put("update", new UpdateCommand(this));
         clientCommands.put("group_counting_by_height", new GroupCountingByHeightCommand(this));
-        clientCommands.put("show", new ShowCommand(this));
+        clientCommands.put("show", new ShowCommand());
     }
 
     public PerformanceState getPerformanceState() {
-        return performanceState;
+        if (networkListener == null) {
+            return performanceState;
+        }
+        return networkListener.getPerformanceState();
     }
 
     public synchronized Map<String, AbstractCommand> getCommandsWithoutAuth() {
@@ -118,9 +129,17 @@ public final class CommandManager {
     }
 
     public void addCommandToHistory(String commandName) {
-        commandHistory.add(commandName);
-        if (commandHistory.size() > HISTORY_LENGTH) {
-            commandHistory.poll();
+        Lock writeLock = lock.writeLock();
+        try {
+            writeLock.lock();
+            if (!Objects.equals(commandName, "show")) {
+                commandHistory.add(commandName);
+            }
+            if (commandHistory.size() > HISTORY_LENGTH) {
+                commandHistory.poll();
+            }
+        } finally {
+            writeLock.unlock();
         }
     }
 
@@ -142,11 +161,11 @@ public final class CommandManager {
             try {
                 return processCommand(command, rawArgs, user);
             } catch (EndOfStreamException e) {
-                performanceState.switchPerformanceStatus();
+                getPerformanceState().switchPerformanceStatus();
             }
 
         }
-        return new Response("No such command, call \"help\" to see the list of commands.");
+        return new Response("No such command, call \"help\" to see the list of commands.", false);
     }
 
     public Response processCommand(AbstractCommand command, String[] rawArgs, User user) throws EndOfStreamException {
@@ -160,15 +179,21 @@ public final class CommandManager {
                 if (commandsSendingWithoutSending.containsKey(command.getName())) {
                     return executeCommand(command, commandArgs);
                 } else {
-                    return networkListener.listen(new Request(command, commandArgs));
+                    try {
+                        return networkListener.listen(new Request(command, commandArgs));
+                    } catch (IOException e) {
+                        return null;
+                    }
                 }
             }
 
         } else {
-            return new Response("Wrong number of arguments.");
+            return new Response("Wrong number of arguments.", false);
         }
         return null;
     }
+
+
 
     public Response executeCommand(AbstractCommand command, Object[] args) {
         addCommandToHistory(command.getName());

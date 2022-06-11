@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="365.0" text="%add_add" textAlignment="CENTER" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otto15.client.gui.controllers.PersonProcessController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="385.0" prefWidth="364.0">
+         <children>
+            <TextField fx:id="nameField" layoutX="108.0" layoutY="25.0" prefHeight="25.0" prefWidth="240.0" />
+            <Label alignment="CENTER" layoutX="15.0" layoutY="25.0" prefHeight="25.0" prefWidth="85.0" text="%info_name" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="15.0" layoutY="70.0" prefHeight="25.0" prefWidth="85.0" text="%info_coordinates" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField layoutX="108.0" layoutY="70.0" prefHeight="30.0" prefWidth="90.0" fx:id="xCoordinatesField" />
+            <TextField fx:id="yCoordinatesField" layoutX="257.0" layoutY="70.0" prefHeight="30.0" prefWidth="90.0" />
+            <Label alignment="CENTER" layoutX="15.0" layoutY="115.0" prefHeight="25.0" prefWidth="85.0" text="%info_height" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="heightField" layoutX="108.0" layoutY="115.0" prefHeight="25.0" prefWidth="240.0" />
+            <Label alignment="CENTER" layoutX="15.0" layoutY="160.0" prefHeight="25.0" prefWidth="85.0" text="%info_eye_color" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="eyeColorComboBox" layoutX="108.0" layoutY="160.0" prefHeight="30.0" prefWidth="240.0" promptText="%add_eye_color_invitation" />
+            <Label alignment="CENTER" layoutX="15.0" layoutY="205.0" prefHeight="25.0" prefWidth="85.0" text="%info_hair_color" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="hairColorComboBox" layoutX="108.0" layoutY="205.0" prefHeight="30.0" prefWidth="240.0" promptText="%add_hair_color_invitation" />
+            <Label alignment="CENTER" layoutX="15.0" layoutY="250.0" prefHeight="25.0" prefWidth="85.0" text="%info_nationality" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="nationalityComboBox" layoutX="108.0" layoutY="250.0" prefHeight="30.0" prefWidth="240.0" promptText=" Choose country" />
+            <Label alignment="CENTER" layoutX="15.0" layoutY="295.0" prefHeight="25.0" prefWidth="85.0" text="%info_location" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField layoutX="108.0" layoutY="295.0" prefHeight="30.0" prefWidth="73.0" fx:id="xLocationField" />
+            <TextField fx:id="yLocationField" layoutX="191.0" layoutY="295.0" prefHeight="30.0" prefWidth="73.0" />
+            <TextField fx:id="zLocationField" layoutX="274.0" layoutY="295.0" prefHeight="30.0" prefWidth="73.0" />
+            <HBox alignment="CENTER" layoutY="339.0" prefHeight="54.0" prefWidth="365.0" spacing="5.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#addButtonPressed" prefHeight="30.0" prefWidth="110.0" text="%add_add">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <Label fx:id="errorNameLabel" layoutX="108.0" layoutY="4.0" prefHeight="18.0" prefWidth="240.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorXCoordinatesLabel" layoutX="108.0" layoutY="53.0" prefHeight="14.0" prefWidth="90.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorYCoordinatesLabel" layoutX="258.0" layoutY="54.0" prefHeight="15.0" prefWidth="88.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorHeightLabel" layoutX="107.0" layoutY="97.0" prefHeight="17.0" prefWidth="242.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorCountryLst" layoutX="109.0" layoutY="234.0" prefHeight="18.0" prefWidth="238.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorXLocationLabel" layoutX="108.0" layoutY="276.0" prefHeight="22.0" prefWidth="74.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorYLocationLabel" layoutX="192.0" layoutY="276.0" prefHeight="18.0" prefWidth="70.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorZLocationLabel" layoutX="276.0" layoutY="276.0" prefHeight="19.0" prefWidth="71.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+  </content>
+   <font>
+      <Font size="19.0" />
+   </font>
+</TitledPane>

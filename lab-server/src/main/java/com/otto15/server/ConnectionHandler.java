@@ -25,18 +25,20 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.Future;
 
 
 public final class ConnectionHandler implements Runnable {
 
     private static final int SELECT_DELAY = 1000;
-    private final Map<SocketChannel, ByteBuffer> channels = Collections.synchronizedMap(new HashMap<>());
+    private final Map<SocketChannel, ByteBuffer> channels = new ConcurrentHashMap<>();
     private final ForkJoinPool forkJoinPool = new ForkJoinPool((int) (Runtime.getRuntime().availableProcessors() * 0.5 * (1 + 10)));
     private final Selector selector;
     private final ServerSocketChannel serverChannel;
     private final RequestExecutor requestExecutor;
-    private final Map<SocketChannel, ChannelState> channelsState = Collections.synchronizedMap(new HashMap<>());
+    private final Map<SocketChannel, ChannelState> channelsState = new ConcurrentHashMap<>();
     private final PerformanceState performanceState;
 
     public ConnectionHandler(RequestExecutor requestExecutor, PerformanceState performanceState) throws IOException {
@@ -46,7 +48,8 @@ public final class ConnectionHandler implements Runnable {
         serverChannel = ServerSocketChannel.open();
         while (true) {
             try {
-                int port = inputPort();
+                //int port = inputPort();
+                int port = Integer.parseInt(System.getenv("SERVER_PORT"));
                 serverChannel.socket().bind(new InetSocketAddress(port));
                 LogConfig.LOGGER.info("Server launched on port - {}", serverChannel.socket().getLocalPort());
                 break;
@@ -88,6 +91,7 @@ public final class ConnectionHandler implements Runnable {
 
     private void close() {
         try {
+            forkJoinPool.shutdown();
             selector.close();
             serverChannel.close();
         } catch (IOException e) {
@@ -139,7 +143,7 @@ public final class ConnectionHandler implements Runnable {
             new Thread(new RequestReader(channel, channels, selector, channelsState))
                     .start();
         }
-        if (channels.get((SocketChannel) key.channel()) == null) {
+        if (channelsState.get(channel) == ChannelState.READY_TO_DIE) {
             throw new IOException();
         }
     }
@@ -150,10 +154,11 @@ public final class ConnectionHandler implements Runnable {
         if (channelsState.get(channel) == ChannelState.READY_TO_WRITE) {
             channelsState.put(channel, ChannelState.WRITING);
             ResponseSender responseSender = new ResponseSender(channel, channels, selector, channelsState);
+
             CompletableFuture.supplyAsync(() -> requestExecutor.execute(channels.get((SocketChannel) key.channel()).array()), forkJoinPool)
                     .thenAcceptAsync(responseSender::send, forkJoinPool);
         }
-        if (channels.get((SocketChannel) key.channel()) == null) {
+        if (channelsState.get(channel) == ChannelState.READY_TO_DIE) {
             throw new IOException();
         }
     }

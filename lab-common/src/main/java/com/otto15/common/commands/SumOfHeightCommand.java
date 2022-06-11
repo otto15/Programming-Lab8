@@ -13,6 +13,6 @@ public class SumOfHeightCommand extends AbstractCommand {
     @Override
     public Response execute(Object[] args) {
         System.out.println();
-        return new Response(String.valueOf(getCommandManager().getCollectionManager().getSumOfHeights()));
+        return new Response(String.valueOf(getCommandManager().getCollectionManager().getSumOfHeights()), true);
     }
 }

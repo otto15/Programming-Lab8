@@ -20,6 +20,6 @@ public class HelpCommand extends AbstractCommand {
                 .values()
                 .stream()
                 .map(value -> value.getName() + " - " + value.getDescription() + ", implies " + value.getInlineArgsCount() + " argument(s)")
-                .collect(Collectors.joining("\n")));
+                .collect(Collectors.joining("\n")), true);
     }
 }

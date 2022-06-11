@@ -16,6 +16,10 @@ import java.util.Collections;
  */
 public class AddIfMinCommand extends AbstractCommand {
 
+    public AddIfMinCommand() {
+        super( "add_if_min", "adds new person if minimal value", 0);
+    }
+
     public AddIfMinCommand(CommandManager commandManager) {
         super(commandManager, "add_if_min", "adds new person if minimal value", 0);
     }
@@ -37,12 +41,12 @@ public class AddIfMinCommand extends AbstractCommand {
         User user = (User) args[1];
         if (newPerson.compareTo(Collections.min(getCommandManager().getCollectionManager().getPersons())) < 0) {
             if (getCommandManager().getDBWorker().addPerson(newPerson, user) <= 0) {
-                new Response("Could not add person.");
+                new Response("Could not add person.", false);
             }
             getCommandManager().getCollectionManager().add(newPerson);
-            return new Response("New person successfully created!");
+            return new Response("New person successfully created!", true);
         } else {
-            return new Response("Given person is not minimal.");
+            return new Response("Given person is not minimal.", false);
         }
 
     }

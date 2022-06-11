@@ -33,15 +33,15 @@ public final class Server {
             Set<Person> personSet = dbWorker.selectAllPersons();
             if (personSet != null) {
                 CollectionManager collectionManager = new CollectionManagerImpl(personSet);
-                PerformanceState performanceState = new PerformanceState();
-                CommandManager commandManager = new CommandManager(collectionManager, dbWorker, performanceState);
+                PerformanceState performanceState = PerformanceState.getInstance();
+                CommandManager commandManager = new CommandManager(collectionManager, dbWorker);
                 RequestExecutor requestExecutor = new RequestExecutor(commandManager);
                 try {
                     ConnectionHandler connectionHandler = new ConnectionHandler(requestExecutor, performanceState);
                     new Thread(new CommandListener(commandManager, false)).start();
                     connectionHandler.run();
                 } catch (IOException e) {
-                    System.out.print("");
+                    System.out.print(e.getMessage());
                 }
             }
         }

@@ -15,6 +15,6 @@ public class GroupCountingByHeightCommand extends AbstractCommand {
     @Override
     public Response execute(Object[] args) {
         getCommandManager().getCollectionManager().makeGroupsByHeight();
-        return new Response(getCommandManager().getCollectionManager().outputGroupsByHeight());
+        return new Response(getCommandManager().getCollectionManager().outputGroupsByHeight(), true);
     }
 }

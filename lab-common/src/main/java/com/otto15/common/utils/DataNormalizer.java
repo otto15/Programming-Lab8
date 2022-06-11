@@ -19,11 +19,6 @@ public final class DataNormalizer {
         if ("".equals(data) || data == null) {
             return new String[0];
         }
-        String[] args = SmartSplitter.smartSplit(data.trim());
-        for (String str : args
-        ) {
-            str = str.trim();
-        }
-        return args;
+        return SmartSplitter.smartSplit(data.trim());
     }
 }

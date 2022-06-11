@@ -3,8 +3,15 @@ package com.otto15.common.entities.validators;
 import com.otto15.common.entities.Coordinates;
 import com.otto15.common.entities.Location;
 import com.otto15.common.entities.Person;
+import com.otto15.common.entities.User;
 import com.otto15.common.entities.enums.Color;
 import com.otto15.common.entities.enums.Country;
+import com.otto15.common.exceptions.ValidationException;
+import com.otto15.common.utils.DataNormalizer;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -126,5 +133,98 @@ public final class PersonValidator {
                 && isCountryValid(person.getNationality())
                 && isCoordinatesValid(person.getCoordinates())
                 && isLocationValid(person.getLocation());
+    }
+
+    public static Person validatePersonFromString(String name, String xCoordinates, String yCoordinates, String sHeight, Color eyeColor, Color hairColor, Country nationality, String xLocation, String yLocation, String zLocation) throws ValidationException {
+        List<String> validationErrorsList = new ArrayList<>();
+        Person person = new Person();
+        try {
+            name = getValidatedName(DataNormalizer.normalize(name));
+            person.setName(name);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        double x = 0, y;
+        try {
+            x = CoordinatesValidator.getValidatedX(xCoordinates);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        try {
+            y = CoordinatesValidator.getValidatedY(yCoordinates);
+            Coordinates coordinates = new Coordinates(x, y);
+            if (isCoordinatesValid(coordinates)) {
+                person.setCoordinates(coordinates);
+                validationErrorsList.add(null);
+            }
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        try {
+            long height = getValidatedHeight(DataNormalizer.normalize(sHeight));
+            person.setHeight(height);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        person.setEyeColor(eyeColor);
+        person.setHairColor(hairColor);
+
+        try {
+            if (nationality == null) {
+                throw new IllegalArgumentException("You have to choose an country");
+            }
+            person.setNationality(nationality);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        double xl = 0;
+        long yl = 0;
+        float zl;
+        try {
+            xl = LocationValidator.getValidatedX(xLocation);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        try {
+            yl = LocationValidator.getValidatedY(yLocation);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        try {
+            zl = LocationValidator.getValidatedZ(zLocation);
+            validationErrorsList.add(null);
+            Location location = new Location(xl, yl, zl);
+            person.setLocation(location);
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+//        try {
+//            Location location = getValidatedLocation(new String[] {xLocation, yLocation, zLocation});
+//            person.setLocation(location);
+//            validationErrorsList.add(null);
+//        } catch (IllegalArgumentException e) {
+//            validationErrorsList.add(e.getMessage());
+//        }
+
+        if (validationErrorsList.stream().anyMatch(Objects::nonNull)) {
+            throw new ValidationException(validationErrorsList);
+        }
+
+        return person;
     }
 }

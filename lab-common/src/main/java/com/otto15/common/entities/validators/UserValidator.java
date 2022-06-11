@@ -1,5 +1,13 @@
 package com.otto15.common.entities.validators;
 
+import com.otto15.common.entities.User;
+import com.otto15.common.exceptions.ValidationException;
+import com.otto15.common.utils.DataNormalizer;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public final class UserValidator {
 
     private static final short MIN_PASSWORD_LENGTH = 4;
@@ -38,4 +46,63 @@ public final class UserValidator {
         return args[0];
     }
 
+    public static User validateUser(String login, String password) throws ValidationException {
+        User user = new User();
+        List<String> validationErrorsList = new ArrayList<>();
+        try {
+            user.setLogin(getValidatedLogin(DataNormalizer.normalize(login)));
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+        try {
+            user.setPassword(getValidatedPassword(DataNormalizer.normalize(password)));
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        if (validationErrorsList.stream().anyMatch(Objects::nonNull)) {
+            throw new ValidationException(validationErrorsList);
+        }
+        return user;
+    }
+
+    public static User validateUser(String login, String password, String repeatedPassword) throws ValidationException {
+        User user = new User();
+        List<String> validationErrorsList = new ArrayList<>();
+
+        try {
+            login = getValidatedLogin(DataNormalizer.normalize(login));
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        try {
+            password = getValidatedPassword(DataNormalizer.normalize(password));
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        try {
+            repeatedPassword = getValidatedPassword(DataNormalizer.normalize(repeatedPassword));
+            validationErrorsList.add(null);
+        } catch (IllegalArgumentException e) {
+            validationErrorsList.add(e.getMessage());
+        }
+
+        if (!password.equals(repeatedPassword)) {
+            validationErrorsList.set(1, "Passwords must be the same");
+            validationErrorsList.set(2, "");
+        }
+
+        if (validationErrorsList.stream().anyMatch(Objects::nonNull)) {
+            throw new ValidationException(validationErrorsList);
+        }
+        user.setLogin(login);
+        user.setPassword(password);
+        return user;
+    }
 }

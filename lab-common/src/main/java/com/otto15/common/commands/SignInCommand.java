@@ -10,6 +10,10 @@ import java.io.IOException;
 
 public class SignInCommand extends AbstractCommand {
 
+    public SignInCommand() {
+        super("sign_in", "sign in user", 0);
+    }
+
     public SignInCommand(CommandManager commandManager) {
         super(commandManager, "sign_in", "sign in user", 0);
     }
@@ -31,10 +35,9 @@ public class SignInCommand extends AbstractCommand {
         User user = (User) args[0];
         long result = getCommandManager().getDBWorker().checkUser(user);
         if (result <= 0) {
-            return new Response("Wrong credentials.");
+            return new Response("Wrong credentials.", false);
         }
-        user.setId(result);
-        return new Response("Signed in.", user);
+        return new Response("Signed in.", user, true);
     }
 
 

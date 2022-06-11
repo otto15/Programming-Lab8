@@ -24,12 +24,19 @@ public abstract class AbstractCommand implements Serializable {
         this.commandManager = commandManager;
     }
 
+    public AbstractCommand(String name, String description, int inlineArgsCount) {
+        this.name = name;
+        this.description = description;
+        this.inlineArgsCount = inlineArgsCount;
+    }
+
     public void setCommandManager(CommandManager commandManager) {
         this.commandManager = commandManager;
     }
 
     /**
      * Execution method for all commands.
+     *
      * @param args
      * @return true - if execution completed successfully, false - if not
      */

@@ -17,7 +17,7 @@ public class ExitCommand extends AbstractCommand {
     @Override
     public Response execute(Object[] args) {
         getCommandManager().getPerformanceState().switchPerformanceStatus();
-        return new Response("Shutting down.");
+        return new Response("Shutting down.", true);
     }
 
 }

@@ -24,17 +24,17 @@ public class ExecuteScriptCommand extends AbstractCommand {
     public Response execute(Object[] args) {
         String fileName = (String) args[0];
         if (FILE_HISTORY.contains(fileName)) {
-            return new Response("There is a problem: script will loop.");
+            return new Response("There is a problem: script will loop.", false);
         } else {
             try {
                 CommandListener listenerFromFile = new CommandListener(new FileReader(fileName), getCommandManager(), true);
                 FILE_HISTORY.add(fileName);
                 listenerFromFile.run();
             } catch (IOException e) {
-                return new Response(e.getMessage());
+                return new Response(e.getMessage(), false);
             }
             FILE_HISTORY.remove(fileName);
         }
-        return new Response("Exiting from " + fileName);
+        return new Response("Exiting from " + fileName, true);
     }
 }

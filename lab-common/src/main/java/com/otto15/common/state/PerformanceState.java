@@ -6,8 +6,18 @@ public class PerformanceState {
 
     private final AtomicBoolean performanceStatus = new AtomicBoolean(true);
 
-    public PerformanceState() {
+    private PerformanceState() {
 
+    }
+
+    public static class PerformanceStateHolder {
+        public static final PerformanceState HOLDER_INSTANCE =
+                new PerformanceState();
+    }
+
+
+    public static PerformanceState getInstance() {
+        return PerformanceStateHolder.HOLDER_INSTANCE;
     }
 
     public boolean getPerformanceStatus() {
